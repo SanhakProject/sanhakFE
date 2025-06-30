@@ -1,0 +1,67 @@
+# Dart & Flutter
+.dart_tool/
+.packages
+.pub-cache/
+.flutter-plugins
+.flutter-plugins-dependencies
+.melos_tool/
+build/
+.flutter-*
+generated_plugin_registrant.dart
+
+# IntelliJ / Android Studio
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# macOS
+.DS_Store
+
+# iOS
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/ephemeral/
+ios/.flutter-plugins
+ios/.flutter-plugins-dependencies
+ios/.generated/
+
+# Android
+android/.gradle/
+android/app/build/
+android/local.properties
+android/.idea/
+android/captures/
+*.keystore
+
+# Windows
+windows/flutter/ephemeral/
+windows/.flutter-plugins
+windows/.flutter-plugins-dependencies
+
+# Web
+web/.dart_tool/
+
+# Linux
+linux/flutter/ephemeral/
+linux/.flutter-plugins
+linux/.flutter-plugins-dependencies
+
+# Crashlytics / Firebase
+*.symbols
+*.crash
+
+# Coverage
+coverage/
+
+# Other
+*.log
+*.tmp
+*.lock
+
+# Personal config (optional)
+.env
