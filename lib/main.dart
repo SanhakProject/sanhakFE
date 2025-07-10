@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'package:sanhak/permission_handler.dart';
+import 'package:sanhak/components/permission_handler.dart';
 import 'package:sanhak/views/login/login_screen.dart';
 
 void main() async {

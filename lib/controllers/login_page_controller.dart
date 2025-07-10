@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 import '../views/home/home_screen.dart';
 
-class LoginController extends GetxController {
+class LoginPageController extends GetxController {
   var isLoading = false.obs;
 
   Future<void> kakaoLogin() async {
@@ -18,5 +18,13 @@ class LoginController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  Future<void> phoneLogin() async {
+    //TODO: 핸드폰 로그인 구현
+  }
+
+  Future<void> phoneRegister() async {
+    //TODO: 핸드폰 회원가입 구현
   }
 }
