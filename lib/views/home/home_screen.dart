@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'home_button.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -13,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Stack(
       children: [
         Positioned.fill(
-          child: Image.asset('assets/images/배경화면.png', fit: BoxFit.cover),
+          child: Image.asset('assets/images/background/배경화면.png', fit: BoxFit.cover),
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
@@ -24,23 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 '게임이름',
                 style: TextStyle(color: Colors.white, fontSize: 35),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                      'assets/images/지난기록.png',
-                    width: 192,
-                  ),
-                  Image.asset(
-                      'assets/images/연주하기.png',
-                    width: 240,
-                  ),
-                  Image.asset(
-                    'assets/images/게임방법.png',
-                    width: 192,
-                  ),
-                ],
-              ),
+              HomeButton(),
             ],
           ),
         )
