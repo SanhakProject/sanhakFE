@@ -36,8 +36,14 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/배경화면.png
-    - assets/images/카카오로그인버튼.png
-    - assets/images/게임방법.png
-    - assets/images/지난기록.png
-    - assets/images/연주하기.png
+    - assets/images/background/배경화면.png
+
+    - assets/images/buttons/카카오로그인버튼.png
+    - assets/images/buttons/게임방법.png
+    - assets/images/buttons/지난기록.png
+    - assets/images/buttons/연주하기.png
+
+    - assets/images/icons/북.png
+    - assets/images/icons/징.png
+    - assets/images/icons/장구.png
+    - assets/images/icons/꽹과리.png

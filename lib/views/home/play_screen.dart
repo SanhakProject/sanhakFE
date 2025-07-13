@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sanhak/components/appbar.dart';
 
-import 'login_button.dart';
+import 'instrument_button.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class PlayScreen extends StatelessWidget {
+  const PlayScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,18 +16,16 @@ class LoginScreen extends StatelessWidget {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
+          appBar: DefaultAppBar(),
           body: Column(
             children: [
-              const Spacer(flex: 3),
-              const Center(
-                child: Text(
-                  '게임이름',
-                  style: TextStyle(color: Colors.white, fontSize: 64),
-                ),
+              SizedBox(height: height * 0.06,),
+              Text(
+                '게임이름',
+                style: TextStyle(color: Colors.white, fontSize: 35),
               ),
-              const Spacer(flex: 1),
-              LoginButtons(),
-              SizedBox(height: height * 0.043),
+              SizedBox(height: 20,),
+              InstrumentButton(),
             ],
           ),
         )
