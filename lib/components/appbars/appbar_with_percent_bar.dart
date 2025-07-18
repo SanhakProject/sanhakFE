@@ -7,6 +7,7 @@ class AppBarWithPercentBar extends StatelessWidget implements PreferredSizeWidge
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,  // 뒤로 가기 버튼 제거
       backgroundColor: Colors.transparent,
       elevation: 0,
       title: Row(
