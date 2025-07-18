@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sanhak/views/login/login_screen.dart';
+import 'package:sanhak/views/phone_login/phone_login_screen.dart';
+import 'package:sanhak/views/phone_register/phone_register_screen.dart';
 
 import '../../controllers/login_page_controller.dart';
 
@@ -27,11 +30,27 @@ class LoginButtons extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('전화번호로 로그인', style: _whiteRobotoStyle),
+            TextButton(
+              onPressed: () {
+                // TODO: Implement phone login logic
+                 Get.to(() => PhoneLoginScreen());
+              },
+              child: const Text(
+                '전화번호로 로그인',
+                style: _whiteRobotoStyle,
+              ),
+            ),
             SizedBox(width: width * 0.015),
             const Text('|', style: _whiteRobotoStyle),
             SizedBox(width: width * 0.015),
-            const Text('전화번호로 가입', style: _whiteRobotoStyle),
+            TextButton(
+              onPressed: () {
+                Get.to(() => PhoneRegisterScreen());
+              },
+              child: Text(
+                '전화번호로 가입', 
+                style: _whiteRobotoStyle),
+                ),
           ],
         ),
       ],
