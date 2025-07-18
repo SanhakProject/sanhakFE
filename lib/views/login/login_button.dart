@@ -4,12 +4,13 @@ import 'package:get/get.dart';
 import '../../controllers/login_page_controller.dart';
 
 class LoginButtons extends StatelessWidget {
-  final controller = Get.put(LoginPageController());
+  const LoginButtons({super.key});
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final controller = Get.find<LoginPageController>();
     return Column(
       children: [
         GestureDetector(

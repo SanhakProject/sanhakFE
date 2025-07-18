@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../../controllers/home_page_controller.dart';
+import 'instrument_screen.dart';
 
 class HomeButton extends StatelessWidget {
-  final controller = HomePageController();
+  const HomeButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class HomeButton extends StatelessWidget {
             width: 240,
           ),
           onTap: () {
-            controller.playGame();
+            Get.to(() => InstrumentScreen());
           },
         ),
         Image.asset(

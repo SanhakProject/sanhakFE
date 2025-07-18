@@ -11,7 +11,7 @@ class LoginScreen extends StatelessWidget {
     return Stack(
       children: [
         Positioned.fill(
-          child: Image.asset('assets/images/background/배경화면.png', fit: BoxFit.cover),
+          child: Image.asset('assets/images/background/배경화면1.png', fit: BoxFit.cover),
         ),
         Scaffold(
           backgroundColor: Colors.transparent,

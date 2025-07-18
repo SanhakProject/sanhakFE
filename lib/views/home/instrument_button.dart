@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../controllers/instrument_page_controller.dart';
 
 class InstrumentButton extends StatelessWidget {
   const InstrumentButton({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<InstrumentPageController>();
     final width = MediaQuery.of(context).size.width;
     final instruments = [
       {'name': '북', 'image': 'assets/images/icons/북.png'},
@@ -18,40 +22,45 @@ class InstrumentButton extends StatelessWidget {
       children: instruments.map((instrument) {
         return Padding(
           padding: EdgeInsets.only(right: width * 0.015),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.7),
-              borderRadius: BorderRadius.circular(15)
-            ),
-            width: 163,
-            height: 163,
-            child: Stack(
-              children: [
-                Positioned(
-                  top: 35,
-                  left: 12,
-                  child: Image.asset(
-                    instrument['image']!,
-                    width: 130,
-                  ),
-                ),
-                Column(
-                  children: [
-                    SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          instrument['name']!,
-                          style: TextStyle(
-                            fontSize: 35,
-                          ),
-                        ),
-                      ],
+          child: GestureDetector(
+            onTap: () {
+              controller.getInstrumentName(instrument['name']!);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.7),
+                borderRadius: BorderRadius.circular(15)
+              ),
+              width: 163,
+              height: 163,
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: 35,
+                    left: 12,
+                    child: Image.asset(
+                      instrument['image']!,
+                      width: 130,
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                  Column(
+                    children: [
+                      SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            instrument['name']!,
+                            style: TextStyle(
+                              fontSize: 35,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         );
