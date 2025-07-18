@@ -18,7 +18,6 @@ class ResultScreen extends StatelessWidget {
             fit: BoxFit.cover,
           ),
 
-          // 좌측 상단: 세로로 3개 Stat
           Positioned(
             top: 96,
             left: 70,
@@ -34,7 +33,6 @@ class ResultScreen extends StatelessWidget {
             ),
           ),
 
-          // 우측 상단 점수 영역
           Positioned(
             top: 40,
             right: 30,
@@ -96,7 +94,6 @@ class ResultScreen extends StatelessWidget {
             ),
           ),
 
-          // 하단 버튼 두 개
           const Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
