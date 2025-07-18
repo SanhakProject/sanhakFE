@@ -52,6 +52,7 @@ class ResultButtons extends StatelessWidget {
               elevation: 0,
             ),
             child: const Text(
+              '틀린 부분 복습하기',
               style: TextStyle(
                 fontSize: 16,
                 fontFamily: 'SolmoeFont',
