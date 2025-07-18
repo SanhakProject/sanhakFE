@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/login_page_controller.dart';
+import '../phone_login/phone_login_screen.dart';
+
 
 class PhoneRegisterButton extends StatelessWidget {
   final controller = Get.put(LoginPageController());
@@ -137,7 +139,7 @@ class PhoneRegisterButton extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            //
+            Get.to(() => PhoneLoginScreen());
           },
           child: const Text(
             '회원가입',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sanhak/views/home/home_screen.dart';
 
 import '../../controllers/login_page_controller.dart';
 
@@ -77,7 +78,7 @@ class PhoneLoginButtons extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            //
+            Get.to(() => HomeScreen());
           },
           child: const Text(
             '로그인',
