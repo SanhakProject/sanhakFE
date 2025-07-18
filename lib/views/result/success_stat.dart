@@ -21,10 +21,9 @@ class SuccessStat extends StatelessWidget {
         ],
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,   // 좌/우 분리
-        crossAxisAlignment: CrossAxisAlignment.center,       // 세로 중앙 정렬
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // 왼쪽에 “성공”
           const Text(
             '성공',
             style: TextStyle(
@@ -37,7 +36,6 @@ class SuccessStat extends StatelessWidget {
             ),
           ),
 
-          // 오른쪽에 숫자 + 퍼센트 (Baseline 정렬)
           Row(
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
