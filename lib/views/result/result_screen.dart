@@ -42,7 +42,6 @@ class ResultScreen extends StatelessWidget {
                 const Text(
                   '새로운 최고 기록!',
                   style: TextStyle(
-                    fontFamily: 'SolmoeFont',
                     fontSize: 24,
                     color: Color(0xFFEDD154),
                   ),
@@ -50,7 +49,6 @@ class ResultScreen extends StatelessWidget {
                 const Text(
                   '12,345,678',
                   style: TextStyle(
-                    fontFamily: 'SolmoeFont',
                     fontSize: 48,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -59,7 +57,6 @@ class ResultScreen extends StatelessWidget {
                 const Text(
                   '최고 점수: 12,345,678',
                   style: TextStyle(
-                    fontFamily: 'SolmoeFont',
                     fontSize: 20,
                     color: Colors.white,
                   ),
@@ -83,7 +80,6 @@ class ResultScreen extends StatelessWidget {
                       '별달거리\n어려움',
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                        fontFamily: 'SolmoeFont',
                         fontSize: 16,
                         color: Colors.white,
                       ),

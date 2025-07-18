@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/login_page_controller.dart';
 import '../phone_login/phone_login_screen.dart';
 
+/// controller (Get.put) 선언은 앱 초기에 설정 (provider.dart)
 
 class PhoneRegisterButton extends StatelessWidget {
-  final controller = Get.put(LoginPageController());
 
   @override
   Widget build(BuildContext context) {

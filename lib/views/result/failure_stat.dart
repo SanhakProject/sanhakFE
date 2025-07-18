@@ -27,7 +27,6 @@ class FailureStat extends StatelessWidget {
           const Text(
             '실패',
             style: TextStyle(
-              fontFamily: 'SolmoeFont',
               fontSize: 24,
               color: Color(0xFFD5D6D9),
             ),
@@ -39,7 +38,6 @@ class FailureStat extends StatelessWidget {
               Text(
                 '1234',
                 style: TextStyle(
-                  fontFamily: 'SolmoeFont',
                   fontSize: 32,
                   color: Colors.white,
                 ),
@@ -48,7 +46,6 @@ class FailureStat extends StatelessWidget {
               Text(
                 '(100%)',
                 style: TextStyle(
-                  fontFamily: 'SolmoeFont',
                   fontSize: 16,
                   color: Colors.white,
                 ),

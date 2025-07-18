@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sanhak/views/login/login_screen.dart';
 import 'package:sanhak/views/phone_login/phone_login_screen.dart';
 import 'package:sanhak/views/phone_register/phone_register_screen.dart';
 
@@ -32,7 +31,6 @@ class LoginButtons extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {
-                // TODO: Implement phone login logic
                  Get.to(() => PhoneLoginScreen());
               },
               child: const Text(

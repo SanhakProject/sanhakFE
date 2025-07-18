@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// font-family 기본 설정은 앱 초기에 선언해서 각 텍스트 마다 선언 불필요 (다른 앱 폰트 사용할 때만 선언)
+
 class ConsecutiveSuccessStat extends StatelessWidget {
   const ConsecutiveSuccessStat({super.key});
 
@@ -27,7 +29,6 @@ class ConsecutiveSuccessStat extends StatelessWidget {
           Text(
             '연속적인 성공',
             style: TextStyle(
-              fontFamily: 'SolmoeFont',
               fontSize: 24,
               color: Colors.white,
               shadows: [
@@ -38,7 +39,6 @@ class ConsecutiveSuccessStat extends StatelessWidget {
           Text(
             '1234',
             style: TextStyle(
-              fontFamily: 'SolmoeFont',
               fontSize: 32,
               color: Colors.white,
               shadows: [
