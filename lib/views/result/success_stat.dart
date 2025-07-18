@@ -27,7 +27,6 @@ class SuccessStat extends StatelessWidget {
           const Text(
             '성공',
             style: TextStyle(
-              fontFamily: 'SolmoeFont',
               fontSize: 24,
               color: Colors.white,
               shadows: [
@@ -43,7 +42,6 @@ class SuccessStat extends StatelessWidget {
               Text(
                 '1234',
                 style: TextStyle(
-                  fontFamily: 'SolmoeFont',
                   fontSize: 32,
                   color: Colors.white,
                   shadows: [
@@ -55,7 +53,6 @@ class SuccessStat extends StatelessWidget {
               const Text(
                 '(100%)',
                 style: TextStyle(
-                  fontFamily: 'SolmoeFont',
                   fontSize: 16,
                   color: Colors.white,
                 ),
@@ -64,7 +61,6 @@ class SuccessStat extends StatelessWidget {
           ),
         ],
       ),
-      
     );
   }
 }

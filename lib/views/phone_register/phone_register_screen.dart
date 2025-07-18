@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sanhak/components/appbars/back_icon_appbar.dart';
 import 'package:sanhak/views/phone_register/phone_register_button.dart';
+
+/// 백 아이콘은 직접 넣는 것이 아닌 BackIconAppBar 사용 (components/appbar/back_icon_appbar.dart)
 
 class PhoneRegisterScreen extends StatelessWidget {
   const PhoneRegisterScreen({super.key});
@@ -10,10 +13,11 @@ class PhoneRegisterScreen extends StatelessWidget {
     return Stack(
       children: [
         Positioned.fill(
-          child: Image.asset('assets/images/background/배경화면.png', fit: BoxFit.cover),
+          child: Image.asset('assets/images/background/배경화면1.png', fit: BoxFit.cover),
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
+          appBar: BackIconAppBar(),
           body: Column(
             children: [
               const Spacer(flex: 4),
@@ -31,26 +35,13 @@ class PhoneRegisterScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
-                      left: 0,
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.arrow_back_ios_new_rounded,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ),
                   ],
                 ),
               ),
               const Spacer(flex: 1),
               PhoneRegisterButton(),
-              Spacer(flex: 2)
-              // SizedBox(height: height * 0.043),
+              Spacer(flex: 2),
+              SizedBox(height: height * 0.043),
             ],
           ),
         )

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../components/appbars/appbar_with_percent_bar.dart';
 import '../../components/buttons/bottom_buttons.dart';
+import '../result/result_screen.dart';
 
 
 class GameScreen extends StatelessWidget {
@@ -28,7 +30,7 @@ class GameScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(onPressed: () {
-                        // TODO: 결과 화면 연동
+                        Get.to(() => ResultScreen());
                       }, child: Text('결과 화면으로 넘어가기')),
                     ],
                   ),

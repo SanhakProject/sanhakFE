@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sanhak/views/home/home_screen.dart';
+import 'package:sanhak/controllers/login_page_controller.dart';
 
-import '../../controllers/login_page_controller.dart';
+/// controller (Get.put) 선언은 앱 초기에 설정 (provider.dart)
+/// 되도록이면 onTap 등 함수 로직은 controller 에 선언! (추후에 API 연동 시 편리) (login_page_controller.dart 참고)
 
 class PhoneLoginButtons extends StatelessWidget {
-  final controller = Get.put(LoginPageController());
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final controller = Get.find<LoginPageController>();
     
     return Column(
       children: [
@@ -78,7 +79,7 @@ class PhoneLoginButtons extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Get.to(() => HomeScreen());
+            controller.phoneLogin();
           },
           child: const Text(
             '로그인',
