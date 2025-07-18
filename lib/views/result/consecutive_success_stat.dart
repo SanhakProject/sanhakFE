@@ -21,8 +21,8 @@ class ConsecutiveSuccessStat extends StatelessWidget {
         ],
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,  // 좌/우 분리
-        crossAxisAlignment: CrossAxisAlignment.center,      // 세로 중앙 정렬
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             '연속적인 성공',
