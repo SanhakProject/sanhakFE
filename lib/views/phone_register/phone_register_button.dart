@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sanhak/controllers/login_page_controller.dart';
 
 import '../phone_login/phone_login_screen.dart';
 
@@ -11,6 +12,7 @@ class PhoneRegisterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final controller = Get.find<LoginPageController>();
 
     return Column(
       children: [
@@ -138,7 +140,7 @@ class PhoneRegisterButton extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Get.to(() => PhoneLoginScreen());
+            controller.phoneRegister();
           },
           child: const Text(
             '회원가입',
