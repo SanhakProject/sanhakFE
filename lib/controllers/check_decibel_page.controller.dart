@@ -2,13 +2,15 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:noise_meter/noise_meter.dart';
-import 'package:sanhak/views/game/game_screen.dart';
 
-// TODO: 5초가 지났는지 확인, 데시벨이 90 데시벨이 넘었는지 (여러 번 90이 넘어야지 확인)
+import '../views/game/game_screen.dart';
+
 class CheckDecibelPageController extends GetxController{
  Rx<int> overDecibel = 0.obs;
  Rx<String> displayedText = '사용하시는 악기를 여러번 연주해주세요!'.obs;
+
  late StreamSubscription<NoiseReading> _noiseCheck;
+ Timer? _changeTextTimer;
 
  void checkDecibel() {
    _noiseCheck = NoiseMeter().noise.listen(
@@ -30,14 +32,15 @@ class CheckDecibelPageController extends GetxController{
  }
 
  void changeText() {
-   Future.delayed(Duration(seconds: 5), () {
-     displayedText.value = '악기가 너무 멀거나 연주되지 않았습니다!\n위치 조정 후 다시 연주해주세요!';
+   _changeTextTimer = Timer(Duration(seconds: 5), () {
+     displayedText.value = "악기가 너무 멀거나 연주되지 않았습니다!\n위치 조정 후 다시 연주해주세요 !";
    });
  }
 
  void stopCheck() {
    displayedText.value = '사용하시는 악기를 여러번 연주해주세요!';
    overDecibel.value = 0;
+   _changeTextTimer?.cancel();
    _noiseCheck.cancel();
  }
 }

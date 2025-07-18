@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sanhak/components/appbar.dart';
-import 'package:sanhak/views/home/music_button.dart';
 
-import 'instrument_button.dart';
+import '../../components/appbars/back_icon_appbar.dart';
+import 'music_button.dart';
+
 
 class MusicScreen extends StatelessWidget {
   const MusicScreen({super.key});
@@ -13,11 +13,11 @@ class MusicScreen extends StatelessWidget {
     return Stack(
       children: [
         Positioned.fill(
-          child: Image.asset('assets/images/background/배경화면.png', fit: BoxFit.cover),
+          child: Image.asset('assets/images/background/배경화면1.png', fit: BoxFit.cover),
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: DefaultAppBar(),
+          appBar: BackIconAppBar(),
           body: Column(
             children: [
               SizedBox(height: height * 0.06,),

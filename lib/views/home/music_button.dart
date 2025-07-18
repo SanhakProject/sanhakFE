@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sanhak/controllers/instrument_page_controller.dart';
+
+import '../check/check_decibel_screen.dart';
 
 class MusicButton extends StatefulWidget {
   const MusicButton({super.key});
@@ -26,7 +30,8 @@ class _MusicButtonState extends State<MusicButton> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    
+    final controller = Get.find<InstrumentPageController>();  // 추후 변수 이름 변경
+
     return Column(
       children: [
         SizedBox(
@@ -81,8 +86,8 @@ class _MusicButtonState extends State<MusicButton> {
 
           TextButton(
             onPressed: () {
-              // 연주하러 가기 로직
-          
+              controller.getSongName(musics[_currentIndex]['title']);
+              // TODO: 선택한 노래 이름 저장 후 페이지 이동
             },
             style: TextButton.styleFrom(
               backgroundColor: Colors.transparent,

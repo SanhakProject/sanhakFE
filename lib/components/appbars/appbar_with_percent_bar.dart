@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:percent_indicator/flutter_percent_indicator.dart';
+
+import '../../controllers/instrument_page_controller.dart';
 
 class AppBarWithPercentBar extends StatelessWidget implements PreferredSizeWidget {
   const AppBarWithPercentBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<InstrumentPageController>();
     return AppBar(
       automaticallyImplyLeading: false,  // 뒤로 가기 버튼 제거
       backgroundColor: Colors.transparent,
@@ -13,7 +17,7 @@ class AppBarWithPercentBar extends StatelessWidget implements PreferredSizeWidge
       title: Row(
         children: [
           Text(
-              "별달거리 - 북",
+              "${controller.songName.value} - ${controller.instrumentName.value}",
             style: TextStyle(
               fontSize: 30,
               color: Colors.white,

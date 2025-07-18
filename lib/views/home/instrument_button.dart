@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/instrument_page_controller.dart';
+import 'music_screen.dart';
 
 class InstrumentButton extends StatelessWidget {
   const InstrumentButton({super.key});
