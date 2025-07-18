@@ -21,8 +21,8 @@ class FailureStat extends StatelessWidget {
         ],
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,  // 좌/우 분리
-        crossAxisAlignment: CrossAxisAlignment.center,      // 세로 중앙 정렬
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Text(
             '실패',
@@ -33,7 +33,7 @@ class FailureStat extends StatelessWidget {
             ),
           ),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.baseline,   // 베이스라인 정렬
+            crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
             children: const [
               Text(
