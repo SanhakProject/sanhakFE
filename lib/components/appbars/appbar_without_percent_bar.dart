@@ -19,7 +19,7 @@ class AppBarWithoutPercentBar extends StatelessWidget implements PreferredSizeWi
       title: Row(
         children: [
           Text(
-            "노래이름 - ${controller.instrumentName.value}",
+            "${controller.songName.value} - ${controller.instrumentName.value}",
             style: TextStyle(
               fontSize: 30,
               color: Colors.white,
