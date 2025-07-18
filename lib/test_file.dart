@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sanhak/components/permission_handler.dart';
+import 'package:sanhak/components/permissions/permission_handler.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:noise_meter/noise_meter.dart';
 
