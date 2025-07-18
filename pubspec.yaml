@@ -16,6 +16,7 @@ dependencies:
   noise_meter: ^5.0.2
   permission_handler: ^11.0.0
   get: ^4.6.6
+  percent_indicator: ^4.2.2
 
 dependency_overrides:
   audio_streamer: 4.2.0
@@ -36,14 +37,21 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/background/배경화면.png
+    - assets/images/background/배경화면1.png
+    - assets/images/background/배경화면2.png
 
     - assets/images/buttons/카카오로그인버튼.png
     - assets/images/buttons/게임방법.png
     - assets/images/buttons/지난기록.png
     - assets/images/buttons/연주하기.png
 
+    - assets/images/buttons/나가기.png
+    - assets/images/buttons/모범연주듣기.png
+    - assets/images/buttons/내연주듣기.png
+
     - assets/images/icons/북.png
     - assets/images/icons/징.png
     - assets/images/icons/장구.png
     - assets/images/icons/꽹과리.png
+
+    - assets/images/icons/스피커.png
