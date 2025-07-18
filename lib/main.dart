@@ -12,6 +12,7 @@ void main() async {
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
   ]);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
   await requestMicPermission();
   initControllers();
   runApp(const MyApp());
