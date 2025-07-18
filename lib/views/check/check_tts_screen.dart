@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sanhak/components/appbars/appbar_with_percent_bar.dart';
+
+import '../../components/appbars/appbar_with_percent_bar.dart';
+import '../../components/buttons/bottom_buttons.dart';
 
 
 class CheckTTSScreen extends StatelessWidget {
@@ -43,26 +45,7 @@ class CheckTTSScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Row(
-                children: [
-                  SizedBox(width: 70,),
-                  Image.asset(
-                      'assets/images/buttons/나가기.png',
-                    width: 88,
-                  ),
-                  Spacer(),
-                  Image.asset(
-                      'assets/images/buttons/모범연주듣기.png',
-                    width: 150,
-                  ),
-                  SizedBox(width: 20,),
-                  Image.asset(
-                      'assets/images/buttons/내연주듣기.png',
-                    width: 150,
-                  ),
-                  SizedBox(width: 40,),
-                ],
-              ),
+              BottomButtons(),
             ],
           ),
         )
