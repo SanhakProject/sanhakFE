@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sanhak/controllers/instrument_page_controller.dart';
 
 class InstrumentButton extends StatelessWidget {
   const InstrumentButton({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<InstrumentPageController>();
     final width = MediaQuery.of(context).size.width;
     final instruments = [
       {'name': '북', 'image': 'assets/images/icons/북.png'},
@@ -30,9 +33,14 @@ class InstrumentButton extends StatelessWidget {
                 Positioned(
                   top: 35,
                   left: 12,
-                  child: Image.asset(
-                    instrument['image']!,
-                    width: 130,
+                  child: GestureDetector(
+                    child: Image.asset(
+                      instrument['image']!,
+                      width: 130,
+                    ),
+                    onTap: () {
+                      // TODO: 악기 정보 전달 후 다음 페이지 이동
+                    },
                   ),
                 ),
                 Column(
