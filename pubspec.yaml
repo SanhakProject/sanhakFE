@@ -17,6 +17,7 @@ dependencies:
   permission_handler: ^11.0.0
   get: ^4.6.6
   percent_indicator: ^4.2.2
+  simple_animations: ^5.2.0
 
 dependency_overrides:
   audio_streamer: 4.2.0
@@ -54,5 +55,8 @@ flutter:
     - assets/images/icons/징.png
     - assets/images/icons/장구.png
     - assets/images/icons/꽹과리.png
-
     - assets/images/icons/스피커.png
+
+    - assets/images/texts/GREAT!.png
+
+    - assets/dummy/dummy_data.json
