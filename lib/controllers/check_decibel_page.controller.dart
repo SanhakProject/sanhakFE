@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:noise_meter/noise_meter.dart';
 
-import '../views/game/game_screen.dart';
+import '../views/loading/loading_prepare_screen.dart';
+
 
 class CheckDecibelPageController extends GetxController{
  Rx<int> overDecibel = 0.obs;
@@ -20,7 +21,7 @@ class CheckDecibelPageController extends GetxController{
          overDecibel.value += 1;
          if (overDecibel.value >= 3) {
            stopCheck();
-           Get.to(() => GameScreen());
+           Get.to(() => LoadingPrepareScreen());
          }
        }
      },

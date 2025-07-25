@@ -8,11 +8,11 @@ import 'package:sanhak/views/login/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([
+  await SystemChrome.setPreferredOrientations([  /// 화면 가로 고정
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
   ]);
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);  // 기기 앱바 무시
   await requestMicPermission();
   initControllers();
   runApp(const MyApp());

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/instrument_page_controller.dart';
-import 'music_screen.dart';
 
 class InstrumentButton extends StatelessWidget {
   const InstrumentButton({super.key});
@@ -37,11 +36,11 @@ class InstrumentButton extends StatelessWidget {
               child: Stack(
                 children: [
                   Positioned(
-                    top: 35,
-                    left: 12,
+                    top: 45,
+                    left: 27,
                     child: Image.asset(
                       instrument['image']!,
-                      width: 130,
+                      width: 100,
                     ),
                   ),
                   Column(

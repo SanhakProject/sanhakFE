@@ -3,11 +3,62 @@ import 'package:get/get.dart';
 
 import '../../components/appbars/appbar_with_percent_bar.dart';
 import '../../components/buttons/bottom_buttons.dart';
+import '../../components/icons/drums_with_name.dart';
+import '../../controllers/game_screen_controller.dart';
+import '../loading/loading_result_wait_screen.dart';
 import '../result/result_screen.dart';
 
-
-class GameScreen extends StatelessWidget {
+class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
+
+  @override
+  State<GameScreen> createState() => _GameScreenState();
+}
+
+class _GameScreenState extends State<GameScreen> {
+  final List<bool> _isBig = List.generate(8, (_) => false);
+  final controller = Get.find<GameScreenController>();
+
+  Future<void> _startSequentialAnimation() async {
+    for (int j = 0; j < controller.totalMeasure.value; j++) {
+      for (int i = 0; i < _isBig.length; i++) {
+        setState(() {
+          _isBig[i] = true;
+        });
+        await Future.delayed(const Duration(milliseconds: 200));
+
+        setState(() {
+          _isBig[i] = false;
+        });
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    ever(controller.currentMeasure, (value) {
+      if (value.length != 8) {
+        Future.delayed(const Duration(seconds: 5), () {
+          Get.to(() => const ResultScreen());  // TODO: 로딩 화면으로 변경 예정
+        });
+      }
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(const Duration(seconds: 3));
+      controller.updateMeasures();
+      _startSequentialAnimation();
+    });
+  }
+
+  @override
+  void dispose() {
+    controller.controllerDispose();
+    // 만약 애니메이션을 추가할 경우 dispose 필요
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +76,39 @@ class GameScreen extends StatelessWidget {
           body: Column(
             children: [
               Expanded(
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(onPressed: () {
-                        Get.to(() => ResultScreen());
-                      }, child: Text('결과 화면으로 넘어가기')),
-                    ],
+                child: (controller.currentMeasure.value.length == 8)
+                 ? Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: List.generate(8, (i) {
+                        return controller.currentMeasure.value.length > i && controller.currentMeasure.value[i].isNotEmpty
+                            ? Transform.scale(
+                          scale: _isBig[i] ? 1.5 : 1.0,
+                          child: IconWithName(name: controller.currentMeasure.value[i],),
+                        )
+                            : const SizedBox(width: 100,);
+                      }),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: controller.nextMeasure.value.length == 8
+                          ? List.generate(8, (i) {
+                        return controller.nextMeasure.value[i].isNotEmpty
+                            ? IconWithName(name: controller.nextMeasure.value[i])
+                            : const SizedBox(width: 100);
+                      })
+                          : [const SizedBox(height: 100,)],
+                    ),
+                  ],
+                )
+                    : Center(child: Text(
+                    '연주를 완료하였습니다!',
+                  style: TextStyle(
+                    fontSize: 30,
                   ),
-                ),
+                )),
               ),
               BottomButtons(),
             ],
