@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sanhak/views/rule/rule_step1_screen.dart';
 
 import 'instrument_screen.dart';
 
@@ -24,9 +25,14 @@ class HomeButton extends StatelessWidget {
             Get.to(() => InstrumentScreen());
           },
         ),
-        Image.asset(
-          'assets/images/buttons/게임방법.png',
-          width: 192,
+        GestureDetector(
+          child: Image.asset(
+            'assets/images/buttons/게임방법.png',
+            width: 192,
+          ),
+          onTap: () {
+            Get.to(() => RuleStep1Screen());
+          },
         ),
       ],
     );
