@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:sanhak/views/rule/rule_bottom_button.dart';
+import 'package:sanhak/views/rule/rule_check_decibel_screen.dart';
 
 
 class RuleStep2Screen extends StatefulWidget {
@@ -18,7 +19,7 @@ class _RuleStep2ScreenState extends State<RuleStep2Screen> {
     
     // 3초 후 다음 화면으로 전환
     Future.delayed(const Duration(seconds: 3), () {
-      Get.to(() => RuleStep2Screen());
+      Get.to(() => RuleCheckDecibelScreen());
     });
   }
 
