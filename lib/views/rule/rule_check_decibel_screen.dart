@@ -18,6 +18,9 @@ class _RuleCheckDecibelScreenState extends State<RuleCheckDecibelScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       controller.checkDecibel();
       controller.changeText();
+      controller.setInitialText(
+        '게임을 시작하기 전, 음향테스트를 진행합니다.\n사용하시는 악기를 여러번 연주해주세요!',
+      );
     });
   }
 
