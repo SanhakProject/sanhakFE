@@ -13,7 +13,7 @@ class MusicButton extends StatefulWidget {
 
 class _MusicButtonState extends State<MusicButton> {
   final PageController _pageController = PageController(
-    viewportFraction: 0.3,
+    viewportFraction: 0.35,
     initialPage: 1,
   );
   
@@ -35,7 +35,7 @@ class _MusicButtonState extends State<MusicButton> {
     return Column(
       children: [
         SizedBox(
-          height: height * 0.57,
+          height: height * 0.55,
           child: PageView.builder(
             controller: _pageController,
             onPageChanged: (index) {
