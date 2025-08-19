@@ -17,8 +17,8 @@ class _RuleFinalScreenState extends State<RuleFinalScreen> {
   void initState() {
     super.initState();
     
-    // 2초 후 다음 화면으로 전환
-    Future.delayed(const Duration(seconds: 2), () {
+    // 3초 후 다음 화면으로 전환
+    Future.delayed(const Duration(seconds: 3), () {
       Get.to(() => HomeScreen());
     });
   }

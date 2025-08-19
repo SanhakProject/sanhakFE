@@ -17,8 +17,8 @@ class _RuleStep2ScreenState extends State<RuleStep2Screen> {
   void initState() {
     super.initState();
     
-    // 3초 후 다음 화면으로 전환
-    Future.delayed(const Duration(seconds: 3), () {
+    // 2초 후 다음 화면으로 전환
+    Future.delayed(const Duration(seconds: 2), () {
       Get.to(() => RuleCheckDecibelScreen());
     });
   }

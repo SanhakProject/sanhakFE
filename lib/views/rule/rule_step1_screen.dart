@@ -18,8 +18,8 @@ class _RuleStep1ScreenState extends State<RuleStep1Screen> {
   void initState() {
     super.initState();
     
-    // 3초 후 다음 화면으로 전환
-    Future.delayed(const Duration(seconds: 3), () {
+    // 2초 후 다음 화면으로 전환
+    Future.delayed(const Duration(seconds: 2), () {
       Get.to(() => RuleStep2Screen());
     });
   }
@@ -66,5 +66,6 @@ class _RuleStep1ScreenState extends State<RuleStep1Screen> {
           ),        
           ],
       ),
-    );  }
+    );  
+  }
 }
