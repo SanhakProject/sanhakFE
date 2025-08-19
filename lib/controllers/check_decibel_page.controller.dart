@@ -15,6 +15,9 @@ class CheckDecibelPageController extends GetxController{
  late StreamSubscription<NoiseReading> _noiseCheck;
  Timer? _changeTextTimer;
 
+ // getter 추가
+ String get initialText => _initialText;
+
    // 초기 텍스트만 설정
   void setInitialText(String text) {
     _initialText = text;
@@ -29,7 +32,7 @@ class CheckDecibelPageController extends GetxController{
          overDecibel.value += 1;
          if (overDecibel.value >= 3) {
            stopCheck();
-           Get.to(() => LoadingPrepareScreen());
+           Get.to(() => LoadingPrepareScreen(gameMode: _initialText));
          }
        }
      },
