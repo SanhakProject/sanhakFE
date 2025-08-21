@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sanhak/views/home/home_screen.dart';
 
 import '../check/check_tts_screen.dart';
+import '../home/home_screen.dart';
 
 /// Get navigator 를 사용할 꺼 같습니다! (메모리 관리, 화면 넘어가는 애니메이션 등 여러 가지 이유) (Get.to, Get.back, Get.offall)
 

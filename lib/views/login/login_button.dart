@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sanhak/views/phone_login/phone_login_screen.dart';
-import 'package:sanhak/views/phone_register/phone_register_screen.dart';
 
 import '../../controllers/login_page_controller.dart';
+import '../phone_login/phone_login_screen.dart';
+import '../phone_register/phone_register_screen.dart';
 
 class LoginButtons extends StatelessWidget {
   const LoginButtons({super.key});

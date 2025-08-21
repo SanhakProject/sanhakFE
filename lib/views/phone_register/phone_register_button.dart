@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sanhak/controllers/login_page_controller.dart';
 
-import '../phone_login/phone_login_screen.dart';
+import '../../controllers/login_page_controller.dart';
 
 /// controller (Get.put) 선언은 앱 초기에 설정 (provider.dart)
 
 class PhoneRegisterButton extends StatelessWidget {
+  const PhoneRegisterButton({super.key});
+
 
   @override
   Widget build(BuildContext context) {

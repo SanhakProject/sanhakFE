@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sanhak/controllers/instrument_page_controller.dart';
 
 import '../../controllers/game_screen_controller.dart';
+import '../../controllers/instrument_page_controller.dart';
 import '../game/game_screen.dart';
 
 class LoadingPrepareScreen extends StatefulWidget {
