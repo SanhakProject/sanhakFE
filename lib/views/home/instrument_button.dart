@@ -14,7 +14,7 @@ class InstrumentButton extends StatelessWidget {
       {'name': '북', 'image': 'assets/images/icons/북.png'},
       {'name': '징', 'image': 'assets/images/icons/징.png'},
       {'name': '장구', 'image': 'assets/images/icons/장구.png'},
-      {'name': '꽹꽈리', 'image': 'assets/images/icons/꽹과리.png'},
+      {'name': '꽹과리', 'image': 'assets/images/icons/꽹과리.png'},
     ];
 
     return Row(
@@ -36,11 +36,11 @@ class InstrumentButton extends StatelessWidget {
               child: Stack(
                 children: [
                   Positioned(
-                    top: 45,
-                    left: 27,
+                    top: instrument['name'] == '징' ? 55 : 50,
+                    left: (instrument['name'] == '장구' || instrument['name'] == '징' ? 32 : 27),
                     child: Image.asset(
                       instrument['image']!,
-                      width: 100,
+                      width: instrument['name'] == '징' ? 90 : 100,
                     ),
                   ),
                   Column(
