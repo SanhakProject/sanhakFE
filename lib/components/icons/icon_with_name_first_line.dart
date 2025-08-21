@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 
-class IconWithName extends StatelessWidget {
+class IconWithNameFirstLine extends StatelessWidget {
   final String name;
-  const IconWithName({super.key, required this.name});
+  final String instrument;
+  const IconWithNameFirstLine({super.key,
+    required this.name,
+    required this.instrument,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Stack(
         children: [
           Image.asset(
-            'assets/images/icons/북.png',
+            'assets/images/icons/$instrument.png',
             width: 90,
           ),
           Positioned(
