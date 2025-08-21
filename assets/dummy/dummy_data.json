@@ -1,5 +1,6 @@
 {
-  "totalMeasure": 12,
+  "totalMeasure": 22,
+  "interval": 175,
   "measure": [
     {
       "first": "둥",
@@ -24,9 +25,9 @@
     {
       "first": "둥",
       "second": "",
-      "third": "둥",
+      "third": "두",
       "fourth": "",
-      "fifth": "두",
+      "fifth": "둥",
       "sixth": "",
       "seventh": "두",
       "eighth": ""
@@ -64,6 +65,46 @@
     {
       "first": "둥",
       "second": "",
+      "third": "두",
+      "fourth": "",
+      "fifth": "둥",
+      "sixth": "",
+      "seventh": "두",
+      "eighth": ""
+    },
+    {
+      "first": "둥",
+      "second": "",
+      "third": "두",
+      "fourth": "",
+      "fifth": "두",
+      "sixth": "",
+      "seventh": "두",
+      "eighth": ""
+    },
+    {
+      "first": "하",
+      "second": "늘",
+      "third": "보",
+      "fourth": "고",
+      "fifth": "별",
+      "sixth": "을",
+      "seventh": "따",
+      "eighth": "고"
+    },
+    {
+      "first": "땅",
+      "second": "을",
+      "third": "보",
+      "fourth": "고",
+      "fifth": "농",
+      "sixth": "사",
+      "seventh": "짓",
+      "eighth": "고"
+    },
+    {
+      "first": "둥",
+      "second": "",
       "third": "둥",
       "fourth": "",
       "fifth": "두",
@@ -82,6 +123,26 @@
       "eighth": ""
     },
     {
+      "first": "올",
+      "second": "해",
+      "third": "도",
+      "fourth": "",
+      "fifth": "대",
+      "sixth": "풍",
+      "seventh": "이",
+      "eighth": "요"
+    },
+    {
+      "first": "내",
+      "second": "년",
+      "third": "에",
+      "fourth": "도",
+      "fifth": "풍",
+      "sixth": "년",
+      "seventh": "일",
+      "eighth": "세"
+    },
+    {
       "first": "둥",
       "second": "",
       "third": "둥",
@@ -102,6 +163,26 @@
       "eighth": ""
     },
     {
+      "first": "달",
+      "second": "아",
+      "third": "달",
+      "fourth": "아",
+      "fifth": "밝",
+      "sixth": "은",
+      "seventh": "달",
+      "eighth": "아"
+    },
+    {
+      "first": "대",
+      "second": "낮",
+      "third": "같",
+      "fourth": "이",
+      "fifth": "밝",
+      "sixth": "은",
+      "seventh": "달",
+      "eighth": "아"
+    },
+    {
       "first": "둥",
       "second": "",
       "third": "둥",
@@ -120,6 +201,27 @@
       "sixth": "",
       "seventh": "두",
       "eighth": ""
+    },
+    {
+      "first": "어",
+      "second": "둠",
+      "third": "속",
+      "fourth": "의",
+      "fifth": "별",
+      "sixth": "빛",
+      "seventh": "이",
+      "eighth": ""
+    },
+    {
+      "first": "우",
+      "second": "리",
+      "third": "네",
+      "fourth": "를",
+      "fifth": "비",
+      "sixth": "춰",
+      "seventh": "주",
+      "eighth": "네"
     }
   ]
 }
+
