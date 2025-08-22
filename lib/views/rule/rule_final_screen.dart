@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../components/appbars/appbar_without_percent_bar.dart';
 import '../home/home_screen.dart';
 import 'rule_bottom_button.dart';
 
@@ -25,29 +26,18 @@ class _RuleFinalScreenState extends State<RuleFinalScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Image.asset(
-            'assets/images/background/배경화면2.png',
-            fit: BoxFit.cover,
-          ),
-
-          const Positioned(
-            top: 15,
-            left: 20,
-            child: Text(
-              '게임 방법',
-              style: TextStyle(
-                fontFamily: 'SolmoeFont',
-                fontSize: 20,
-                color: Color(0xFFEDEAE6),
-              ),
-            ),
-          ),
-
-          const Center(
+    return Stack(
+      children: [
+        Positioned.fill(
+            child: Image.asset(
+              'assets/images/background/배경화면2.png',
+              fit: BoxFit.cover,
+            )
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBarWithoutPercentBar(),
+          body: Center(
             child: Text(
               '고생하셨습니다!\n이제 본격적인 사물놀이 연주를 시작해볼까요?',
               textAlign: TextAlign.center,
@@ -58,13 +48,9 @@ class _RuleFinalScreenState extends State<RuleFinalScreen> {
               ),
             ),
           ),
-          Positioned(
-            bottom: 9,
-            left: 70,
-            child: RuleBottomButton(),
-          ),        
-          ],
-      ),
-    ); 
+          bottomNavigationBar: RuleBottomButton(),
+        )
+      ],
+    );
   }
 }

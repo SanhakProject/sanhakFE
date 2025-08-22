@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../components/appbars/appbar_without_percent_bar.dart';
 import '../../controllers/check_decibel_page.controller.dart';
 import 'rule_bottom_button.dart';
 class RuleCheckDecibelScreen extends StatefulWidget {
@@ -33,45 +34,34 @@ class _RuleCheckDecibelScreenState extends State<RuleCheckDecibelScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset('assets/images/background/배경화면2.png', fit: BoxFit.cover),
-          ),
-          const Positioned(
-            top: 15,
-            left: 20,
-            child: Text(
-              '게임 방법',
-              style: TextStyle(
-                fontFamily: 'SolmoeFont',
-                fontSize: 20,
-                color: Color(0xFFEDEAE6),
-              ),
+    return Stack(
+      children: [
+        Positioned.fill(
+            child: Image.asset(
+              'assets/images/background/배경화면2.png',
+              fit: BoxFit.cover,
+            ),
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBarWithoutPercentBar(),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Obx(() => Text(
+                  controller.displayedText.value,
+                  style: TextStyle(color: Colors.black, fontSize: 30),
+                ),
+                ),
+                SizedBox(height: 20,),
+                Image.asset('assets/images/icons/스피커.png', width: 40,),
+              ],
             ),
           ),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Obx(() => Text(
-                      controller.displayedText.value,
-                      style: TextStyle(color: Colors.black, fontSize: 30),
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  Image.asset('assets/images/icons/스피커.png', width: 40,),
-                ],
-              ),
-            ),
-          Positioned(
-            bottom: 9,
-            left: 70,
-            child: RuleBottomButton(),
-          ),   
-        ],
-      ),
+          bottomNavigationBar: RuleBottomButton(),
+        )
+      ],
     );
   }
 }

@@ -9,14 +9,23 @@ class RuleBottomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-          onTap: () {
-            exitDialog();
-          },
-          child: Image.asset(
-            'assets/images/buttons/나가기.png',
-            width: 88,
-          ),
-        );
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 70.0, vertical: 10),
+      child: SizedBox(
+        height: 33,
+        child: Row(
+          children: [
+            GestureDetector(
+                  onTap: () {
+                    exitDialog();
+                  },
+                  child: Image.asset(
+                    'assets/images/buttons/나가기.png',
+                  ),
+                ),
+          ],
+        ),
+      ),
+    );
   }
 }

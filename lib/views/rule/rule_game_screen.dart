@@ -69,60 +69,56 @@ class _RuleGameScreenState extends State<RuleGameScreen> {
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBarWithPercentBar(),
-          body: Column(
-            children: [
-              Obx(() => Expanded(
-                  child: (controller.currentMeasure.length == 8)
-                    ? Column(
+          body: Obx(() => Center(
+              child: (controller.currentMeasure.length == 8)
+                ? Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: List.generate(8, (i) {
+                      return controller.currentMeasure.length > i && controller.currentMeasure[i].isNotEmpty
+                          ? Transform.scale(
+                        scale: _isBig[i] ? 1.5 : 1.0,
+                        child: IconWithNameFirstLine(
+                          name: controller.currentMeasure[i],
+                          instrument: "북",
+                        ),
+                      )
+                          : const SizedBox(width: 100,);
+                    }),
+                  ),
+                ),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: List.generate(8, (i) {
-                          return controller.currentMeasure.length > i && controller.currentMeasure[i].isNotEmpty
-                              ? Transform.scale(
-                            scale: _isBig[i] ? 1.5 : 1.0,
-                            child: IconWithNameFirstLine(
-                              name: controller.currentMeasure[i],
-                              instrument: "북",
-                            ),
+                    SizedBox(width: width * 0.3333),
+                    ...(
+                        controller.nextMeasure.length == 8
+                            ? List.generate(8, (i) {
+                          return controller.nextMeasure[i].isNotEmpty
+                              ? IconWithNameNextLine(
+                            name: controller.nextMeasure[i],
+                            instrument: "북",
                           )
-                              : const SizedBox(width: 100,);
-                        }),
-                      ),
+                              : const SizedBox(width: 75);
+                        })
+                            : [const SizedBox(height: 100)]
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        SizedBox(width: width * 0.3333),
-                        ...(
-                            controller.nextMeasure.length == 8
-                                ? List.generate(8, (i) {
-                              return controller.nextMeasure[i].isNotEmpty
-                                  ? IconWithNameNextLine(
-                                name: controller.nextMeasure[i],
-                                instrument: "북",
-                              )
-                                  : const SizedBox(width: 75);
-                            })
-                                : [const SizedBox(height: 100)]
-                        ),
-                      ],
-                    )
                   ],
                 )
-                    : Center(child: Text(
-                  '연주를 완료하였습니다!',
-                  style: TextStyle(
-                    fontSize: 30,
-                  ),
-                )),
-              )),
-              RuleBottomButton(),
-            ],
-          ),
+              ],
+            )
+                : Center(child: Text(
+              '연주를 완료하였습니다!',
+              style: TextStyle(
+                fontSize: 30,
+              ),
+            )),
+          )),
+          bottomNavigationBar: RuleBottomButton(),
         )
       ],
     );

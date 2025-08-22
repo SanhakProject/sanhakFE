@@ -21,7 +21,7 @@ class AppBarWithPercentBar extends StatelessWidget implements PreferredSizeWidge
                 ? controller.songName.value
                 : "${controller.songName.value} - ${controller.instrumentName.value}",
             style: TextStyle(
-              fontSize: 30,
+              fontSize: 24,
               color: Colors.white,
             ),
           ),
