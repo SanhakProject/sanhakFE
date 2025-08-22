@@ -50,10 +50,12 @@ class _LoadingPrepareScreenState extends State<LoadingPrepareScreen> {
             top: 15,
             left: 20,
             child: Text(
-              '${instrumentController.songName.value} - ${instrumentController.instrumentName.value}',
+              instrumentController.songName.value == '게임 방법'
+                  ? instrumentController.songName.value
+                  : "${instrumentController.songName.value} - ${instrumentController.instrumentName.value}",
               style: TextStyle(
                 fontFamily: 'SolmoeFont',
-                fontSize: 20,
+                fontSize: 30,
                 color: Color(0xFFEDEAE6),
               ),
             ),

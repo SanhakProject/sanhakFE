@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:sanhak/views/home/home_screen.dart';
-import 'package:sanhak/views/rule/rule_bottom_button.dart';
+
+import '../home/home_screen.dart';
+import 'rule_bottom_button.dart';
 
 class RuleFinalScreen extends StatefulWidget {
   const RuleFinalScreen({super.key});
