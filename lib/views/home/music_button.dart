@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sanhak/controllers/instrument_page_controller.dart';
 
-import '../check/check_decibel_screen.dart';
+import '../../controllers/instrument_page_controller.dart';
 
 class MusicButton extends StatefulWidget {
   const MusicButton({super.key});
@@ -30,7 +29,7 @@ class _MusicButtonState extends State<MusicButton> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    final controller = Get.find<InstrumentPageController>();  // 추후 변수 이름 변경
+    final controller = Get.find<InstrumentPageController>();
 
     return Column(
       children: [

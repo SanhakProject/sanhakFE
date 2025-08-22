@@ -1,33 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/game_screen_controller.dart';
-import '../../provider.dart';
+import '../../controllers/instrument_page_controller.dart';
 import '../game/game_screen.dart';
-
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([  /// 화면 가로 고정
-    DeviceOrientation.landscapeLeft,
-    DeviceOrientation.landscapeRight,
-  ]);
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);  // 기기 앱바 무시
-  initControllers();
-  runApp(const LoadingPrepareScreenApp());
-}
-
-class LoadingPrepareScreenApp extends StatelessWidget {
-  const LoadingPrepareScreenApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(fontFamily: 'SolmoeFont'),
-        home: LoadingPrepareScreen()
-    );
-  }
-}
 
 class LoadingPrepareScreen extends StatefulWidget {
   const LoadingPrepareScreen({super.key});
@@ -38,6 +14,7 @@ class LoadingPrepareScreen extends StatefulWidget {
 
 class _LoadingPrepareScreenState extends State<LoadingPrepareScreen> {
   final controller = Get.find<GameScreenController>();
+  final instrumentController = Get.find<InstrumentPageController>();
 
   Future<void> _prepareInformation() async {
     await controller.fetchMeasures();
@@ -62,11 +39,11 @@ class _LoadingPrepareScreenState extends State<LoadingPrepareScreen> {
             fit: BoxFit.cover,
           ),
 
-          const Positioned(
+          Positioned(
             top: 15,
             left: 20,
             child: Text(
-              '노래이름 - 북',
+              '${instrumentController.songName.value} - ${instrumentController.instrumentName.value}',
               style: TextStyle(
                 fontFamily: 'SolmoeFont',
                 fontSize: 20,

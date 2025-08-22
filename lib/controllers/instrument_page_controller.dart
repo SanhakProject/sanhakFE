@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
-import 'package:sanhak/views/check/check_decibel_screen.dart';
 
+import '../views/check/check_decibel_screen.dart';
 import '../views/home/music_screen.dart';
 
 class InstrumentPageController extends GetxController {
-  Rx<String> instrumentName = '북'.obs;  // 게임 중 화면 개발 완료 시 북 제거
+  Rx<String> instrumentName = ''.obs;
   Rx<String> songName = ''.obs;
 
   void getInstrumentName(String instrument) {

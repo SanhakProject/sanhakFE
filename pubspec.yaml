@@ -18,6 +18,7 @@ dependencies:
   get: ^4.6.6
   percent_indicator: ^4.2.2
   simple_animations: ^5.2.0
+  just_audio: ^0.9.36
 
 dependency_overrides:
   audio_streamer: 4.2.0
@@ -60,3 +61,4 @@ flutter:
     - assets/images/texts/GREAT!.png
 
     - assets/dummy/dummy_data.json
+    - assets/dummy/dummy_music.mp3

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sanhak/views/result/success_stat.dart';
-import 'package:sanhak/views/result/failure_stat.dart';
-import 'package:sanhak/views/result/consecutive_success_stat.dart';
 import 'package:sanhak/views/result/result_buttons.dart';
+import 'package:sanhak/views/result/success_stat.dart';
+
+import 'consecutive_success_stat.dart';
+import 'failure_stat.dart';
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({super.key});

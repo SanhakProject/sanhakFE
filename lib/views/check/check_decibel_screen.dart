@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sanhak/controllers/check_decibel_page.controller.dart';
 
 import '../../components/appbars/appbar_without_percent_bar.dart';
+import '../../controllers/check_decibel_page.controller.dart';
 
 class CheckDecibelScreen extends StatefulWidget {
   const CheckDecibelScreen({super.key});
