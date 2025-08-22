@@ -16,4 +16,8 @@ class InstrumentPageController extends GetxController {
     songName.value = name;
     Get.to(() => CheckDecibelScreen());
   }
+
+  void setPractice() {
+    songName.value = '게임 방법';
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controllers/instrument_page_controller.dart';
 import 'rule_bottom_button.dart';
 import 'rule_step2_screen.dart';
 
@@ -13,10 +14,12 @@ class RuleStep1Screen extends StatefulWidget {
 }
 
 class _RuleStep1ScreenState extends State<RuleStep1Screen> {
+  final controller = Get.find<InstrumentPageController>();
   
   @override
   void initState() {
     super.initState();
+    controller.setPractice();
     
     // 2초 후 다음 화면으로 전환
     Future.delayed(const Duration(seconds: 2), () {
