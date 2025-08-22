@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sanhak/views/rule/rule_bottom_button.dart';
-import 'package:sanhak/views/rule/rule_final_screen.dart';
 
 import '../../components/appbars/appbar_with_percent_bar.dart';
 import '../../components/icons/icon_with_name_first_line.dart';
 import '../../components/icons/icon_with_name_next_line.dart';
 import '../../controllers/game_screen_controller.dart';
+import 'rule_bottom_button.dart';
+import 'rule_final_screen.dart';
 
 class RuleGameScreen extends StatefulWidget {
   const RuleGameScreen({super.key});

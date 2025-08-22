@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sanhak/controllers/check_decibel_page.controller.dart';
 import 'package:sanhak/views/rule/rule_bottom_button.dart';
+
+import '../../controllers/check_decibel_page.controller.dart';
 class RuleCheckDecibelScreen extends StatefulWidget {
   const RuleCheckDecibelScreen({super.key});
 

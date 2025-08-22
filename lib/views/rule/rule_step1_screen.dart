@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:sanhak/views/rule/rule_bottom_button.dart';
-import 'package:sanhak/views/rule/rule_step2_screen.dart';
+
+import 'rule_bottom_button.dart';
+import 'rule_step2_screen.dart';
 
 
 class RuleStep1Screen extends StatefulWidget {
