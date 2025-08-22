@@ -20,6 +20,8 @@ class _CheckDecibelScreenState extends State<CheckDecibelScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       controller.checkDecibel();
       controller.changeText();
+      controller.setInitialText('사용하시는 악기를 여러번 연주해주세요!');
+
     });
   }
 

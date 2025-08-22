@@ -8,10 +8,21 @@ import '../views/loading/loading_prepare_screen.dart';
 
 class CheckDecibelPageController extends GetxController{
  Rx<int> overDecibel = 0.obs;
- Rx<String> displayedText = '사용하시는 악기를 여러번 연주해주세요!'.obs;
+ Rx<String> displayedText = ''.obs;
+
+ String _initialText = '';
 
  late StreamSubscription<NoiseReading> _noiseCheck;
  Timer? _changeTextTimer;
+
+ // getter 추가
+ String get initialText => _initialText;
+
+   // 초기 텍스트만 설정
+  void setInitialText(String text) {
+    _initialText = text;
+    displayedText.value = text;
+  }
 
  void checkDecibel() {
    _noiseCheck = NoiseMeter().noise.listen(
@@ -21,7 +32,7 @@ class CheckDecibelPageController extends GetxController{
          overDecibel.value += 1;
          if (overDecibel.value >= 3) {
            stopCheck();
-           Get.to(() => LoadingPrepareScreen());
+           Get.to(() => LoadingPrepareScreen(gameMode: _initialText));
          }
        }
      },
@@ -39,7 +50,7 @@ class CheckDecibelPageController extends GetxController{
  }
 
  void stopCheck() {
-   displayedText.value = '사용하시는 악기를 여러번 연주해주세요!';
+   displayedText.value = _initialText;
    overDecibel.value = 0;
    _changeTextTimer?.cancel();
    _noiseCheck.cancel();
