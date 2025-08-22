@@ -5,6 +5,7 @@ import '../../components/appbars/appbar_with_percent_bar.dart';
 import '../../components/icons/icon_with_name_first_line.dart';
 import '../../components/icons/icon_with_name_next_line.dart';
 import '../../controllers/game_screen_controller.dart';
+import '../../controllers/music_controller.dart';
 import 'rule_bottom_button.dart';
 import 'rule_final_screen.dart';
 
@@ -18,6 +19,7 @@ class RuleGameScreen extends StatefulWidget {
 class _RuleGameScreenState extends State<RuleGameScreen> {
   final List<bool> _isBig = List.generate(8, (_) => false);
   final controller = Get.find<GameScreenController>();
+  final musicController = Get.find<MusicController>();
 
   Future<void> _startSequentialAnimation() async {
     for (int j = 0; j < controller.totalMeasure.value; j++) {
@@ -42,7 +44,7 @@ class _RuleGameScreenState extends State<RuleGameScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(seconds: 1));
-      controller.playMusic();
+      musicController.playMusic();
       await Future.delayed(const Duration(seconds: 1));
       controller.updateMeasures();
       _startSequentialAnimation();
@@ -52,7 +54,7 @@ class _RuleGameScreenState extends State<RuleGameScreen> {
   @override
   void dispose() {
     super.dispose();
-    controller.stopMusic();
+    musicController.stopMusic();
   }
 
   @override

@@ -7,6 +7,7 @@ import '../../components/icons/icon_with_name_first_line.dart';
 import '../../components/icons/icon_with_name_next_line.dart';
 import '../../controllers/game_screen_controller.dart';
 import '../../controllers/instrument_page_controller.dart';
+import '../../controllers/music_controller.dart';
 import '../result/result_screen.dart';
 
 class GameScreen extends StatefulWidget {
@@ -20,6 +21,7 @@ class _GameScreenState extends State<GameScreen> {
   final List<bool> _isBig = List.generate(8, (_) => false);
   final controller = Get.find<GameScreenController>();
   final instrumentController = Get.find<InstrumentPageController>();
+  final musicController = Get.find<MusicController>();
 
   Future<void> _startSequentialAnimation() async {
     for (int j = 0; j < controller.totalMeasure.value; j++) {
@@ -44,7 +46,7 @@ class _GameScreenState extends State<GameScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(seconds: 1));
-      controller.playMusic();
+      musicController.playMusic();
       await Future.delayed(const Duration(seconds: 1));
       controller.updateMeasures();
       _startSequentialAnimation();
@@ -54,7 +56,7 @@ class _GameScreenState extends State<GameScreen> {
   @override
   void dispose() {
     super.dispose();
-    controller.stopMusic();
+    musicController.stopMusic();
   }
 
   @override

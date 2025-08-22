@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:just_audio/just_audio.dart';
 
 import '../helpers/filter_measure.dart';
 import '../helpers/filter_total_measure.dart';
@@ -10,8 +9,6 @@ class GameScreenController extends GetxController {
   RxList<List<String>> allMeasures = <List<String>>[].obs;
   RxList<String> currentMeasure = <String>[].obs;
   RxList<String> nextMeasure = <String>[].obs;
-
-  final AudioPlayer _player = AudioPlayer();
 
   Future<void> fetchMeasures() async {
     try {
@@ -37,20 +34,5 @@ class GameScreenController extends GetxController {
     }
     await Future.delayed(const Duration(seconds: 1));
     currentMeasure.value = [''];
-  }
-
-  Future<void> playMusic() async {
-    try {
-      await _player.setAsset('assets/dummy/dummy_music.mp3');
-      await _player.seek(Duration.zero);
-    } catch (e) {
-      throw Exception("_initPlayer Error: $e");
-    }
-    _player.play();
-  }
-
-  void stopMusic() {
-    _player.stop();
-    _player.dispose();
   }
 }
