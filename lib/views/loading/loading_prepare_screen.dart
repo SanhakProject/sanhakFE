@@ -60,6 +60,7 @@ class _LoadingPrepareScreenState extends State<LoadingPrepareScreen> {
               ),
             ),
           ),
+          bottomNavigationBar: SizedBox(height: 33,),
         )
       ],
     );
