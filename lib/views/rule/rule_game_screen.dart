@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sanhak/views/rule/rule_bottom_button.dart';
 import 'package:sanhak/views/rule/rule_final_screen.dart';
 
 import '../../components/appbars/appbar_with_percent_bar.dart';
-import 'package:sanhak/views/rule/rule_bottom_button.dart';
-import '../../components/icons/drums_with_name.dart';
+import '../../components/icons/icon_with_name_first_line.dart';
+import '../../components/icons/icon_with_name_next_line.dart';
 import '../../controllers/game_screen_controller.dart';
 
 class RuleGameScreen extends StatefulWidget {
@@ -24,29 +25,25 @@ class _RuleGameScreenState extends State<RuleGameScreen> {
         setState(() {
           _isBig[i] = true;
         });
-        await Future.delayed(const Duration(milliseconds: 200));
-
+        await Future.delayed(const Duration(milliseconds: 173));
         setState(() {
           _isBig[i] = false;
         });
       }
     }
+    Future.delayed(const Duration(seconds: 5), () {
+      Get.to(() => const RuleFinalScreen());  // TODO: 로딩 화면으로 변경 예정
+    });
   }
 
   @override
   void initState() {
     super.initState();
 
-    ever(controller.currentMeasure, (value) {
-      if (value.length != 8) {
-        Future.delayed(const Duration(seconds: 5), () {
-          Get.to(() => const RuleFinalScreen());
-        });
-      }
-    });
-
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await Future.delayed(const Duration(seconds: 3));
+      await Future.delayed(const Duration(seconds: 1));
+      controller.playMusic();
+      await Future.delayed(const Duration(seconds: 1));
       controller.updateMeasures();
       _startSequentialAnimation();
     });
@@ -54,13 +51,13 @@ class _RuleGameScreenState extends State<RuleGameScreen> {
 
   @override
   void dispose() {
-    controller.controllerDispose();
-    // 만약 애니메이션을 추가할 경우 dispose 필요
     super.dispose();
+    controller.stopMusic();
   }
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Stack(
       children: [
         Positioned.fill(
@@ -72,52 +69,58 @@ class _RuleGameScreenState extends State<RuleGameScreen> {
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBarWithPercentBar(),
-          body: Stack( // Column을 Stack으로 변경
+          body: Column(
             children: [
-              Column(
-                children: [
-                  Expanded(
-                    child: (controller.currentMeasure.value.length == 8)
-                     ? Column(
+              Obx(() => Expanded(
+                  child: (controller.currentMeasure.length == 8)
+                    ? Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: List.generate(8, (i) {
+                          return controller.currentMeasure.length > i && controller.currentMeasure[i].isNotEmpty
+                              ? Transform.scale(
+                            scale: _isBig[i] ? 1.5 : 1.0,
+                            child: IconWithNameFirstLine(
+                              name: controller.currentMeasure[i],
+                              instrument: "북",
+                            ),
+                          )
+                              : const SizedBox(width: 100,);
+                        }),
+                      ),
+                    ),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: List.generate(8, (i) {
-                            return controller.currentMeasure.value.length > i && controller.currentMeasure.value[i].isNotEmpty
-                                ? Transform.scale(
-                              scale: _isBig[i] ? 1.5 : 1.0,
-                              child: IconWithName(name: controller.currentMeasure.value[i],),
-                            )
-                                : const SizedBox(width: 100,);
-                          }),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: controller.nextMeasure.value.length == 8
-                              ? List.generate(8, (i) {
-                            return controller.nextMeasure.value[i].isNotEmpty
-                                ? IconWithName(name: controller.nextMeasure.value[i])
-                                : const SizedBox(width: 100);
-                          })
-                              : [const SizedBox(height: 100,)],
+                        SizedBox(width: width * 0.3333),
+                        ...(
+                            controller.nextMeasure.length == 8
+                                ? List.generate(8, (i) {
+                              return controller.nextMeasure[i].isNotEmpty
+                                  ? IconWithNameNextLine(
+                                name: controller.nextMeasure[i],
+                                instrument: "북",
+                              )
+                                  : const SizedBox(width: 75);
+                            })
+                                : [const SizedBox(height: 100)]
                         ),
                       ],
                     )
-                        : Center(child: Text(
-                        '연주를 완료하였습니다!',
-                      style: TextStyle(
-                        fontSize: 30,
-                      ),
-                    )),
+                  ],
+                )
+                    : Center(child: Text(
+                  '연주를 완료하였습니다!',
+                  style: TextStyle(
+                    fontSize: 30,
                   ),
-                ],
-              ),
-              Positioned(
-                bottom: 9,
-                left: 70,
-                child: RuleBottomButton(),
-              ),
+                )),
+              )),
+              RuleBottomButton(),
             ],
           ),
         )
