@@ -2,24 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../components/appbars/appbar_with_percent_bar.dart';
-import '../../components/buttons/bottom_buttons.dart';
 import '../../components/icons/icon_with_name_first_line.dart';
 import '../../components/icons/icon_with_name_next_line.dart';
 import '../../controllers/game_screen_controller.dart';
-import '../../controllers/instrument_page_controller.dart';
-import '../result/result_screen.dart';
+import 'rule_bottom_button.dart';
+import 'rule_final_screen.dart';
 
-class GameScreen extends StatefulWidget {
-  const GameScreen({super.key});
+class RuleGameScreen extends StatefulWidget {
+  const RuleGameScreen({super.key});
 
   @override
-  State<GameScreen> createState() => _GameScreenState();
+  State<RuleGameScreen> createState() => _RuleGameScreenState();
 }
 
-class _GameScreenState extends State<GameScreen> {
+class _RuleGameScreenState extends State<RuleGameScreen> {
   final List<bool> _isBig = List.generate(8, (_) => false);
   final controller = Get.find<GameScreenController>();
-  final instrumentController = Get.find<InstrumentPageController>();
 
   Future<void> _startSequentialAnimation() async {
     for (int j = 0; j < controller.totalMeasure.value; j++) {
@@ -34,7 +32,7 @@ class _GameScreenState extends State<GameScreen> {
       }
     }
     Future.delayed(const Duration(seconds: 5), () {
-      Get.to(() => const ResultScreen());  // TODO: 로딩 화면으로 변경 예정
+      Get.to(() => const RuleFinalScreen());  // TODO: 로딩 화면으로 변경 예정
     });
   }
 
@@ -74,7 +72,7 @@ class _GameScreenState extends State<GameScreen> {
           body: Column(
             children: [
               Obx(() => Expanded(
-                child: (controller.currentMeasure.length == 8)
+                  child: (controller.currentMeasure.length == 8)
                     ? Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -88,7 +86,7 @@ class _GameScreenState extends State<GameScreen> {
                             scale: _isBig[i] ? 1.5 : 1.0,
                             child: IconWithNameFirstLine(
                               name: controller.currentMeasure[i],
-                              instrument: instrumentController.instrumentName.value,
+                              instrument: "북",
                             ),
                           )
                               : const SizedBox(width: 100,);
@@ -105,7 +103,7 @@ class _GameScreenState extends State<GameScreen> {
                               return controller.nextMeasure[i].isNotEmpty
                                   ? IconWithNameNextLine(
                                 name: controller.nextMeasure[i],
-                                instrument: instrumentController.instrumentName.value,
+                                instrument: "북",
                               )
                                   : const SizedBox(width: 75);
                             })
@@ -122,7 +120,7 @@ class _GameScreenState extends State<GameScreen> {
                   ),
                 )),
               )),
-              BottomButtons(),
+              RuleBottomButton(),
             ],
           ),
         )

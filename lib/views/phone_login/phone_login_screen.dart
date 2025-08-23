@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sanhak/components/appbars/back_icon_appbar.dart';
 import 'package:sanhak/views/phone_login/phone_login_button.dart';
+
+import '../../components/appbars/back_icon_appbar.dart';
 
 /// 백 아이콘은 직접 넣는 것이 아닌 BackIconAppBar 사용 (components/appbar/back_icon_appbar.dart)
 

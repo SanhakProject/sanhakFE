@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sanhak/controllers/check_decibel_page.controller.dart';
 
 import '../../components/appbars/appbar_without_percent_bar.dart';
+import '../../controllers/check_decibel_page.controller.dart';
 
 class CheckDecibelScreen extends StatefulWidget {
   const CheckDecibelScreen({super.key});
@@ -20,6 +20,8 @@ class _CheckDecibelScreenState extends State<CheckDecibelScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       controller.checkDecibel();
       controller.changeText();
+      controller.setInitialText('사용하시는 악기를 여러번 연주해주세요!');
+
     });
   }
 

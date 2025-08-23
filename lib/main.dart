@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'package:sanhak/components/permissions/permission_handler.dart';
-import 'package:sanhak/provider.dart';
-import 'package:sanhak/views/login/login_screen.dart';
+
+import 'components/permissions/permission_handler.dart';
+import 'provider.dart';
+import 'views/login/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

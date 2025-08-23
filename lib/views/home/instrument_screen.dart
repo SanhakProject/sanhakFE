@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sanhak/components/appbars/back_icon_appbar.dart';
 
+import '../../components/appbars/back_icon_appbar.dart';
 import 'instrument_button.dart';
 
 class InstrumentScreen extends StatelessWidget {
