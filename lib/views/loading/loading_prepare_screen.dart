@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../components/appbars/appbar_without_percent_bar.dart';
 import '../../controllers/game_screen_controller.dart';
 import '../../controllers/instrument_page_controller.dart';
 import '../game/game_screen.dart';
@@ -37,31 +38,18 @@ class _LoadingPrepareScreenState extends State<LoadingPrepareScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Image.asset(
-            'assets/images/background/배경화면2.png',
-            fit: BoxFit.cover,
-          ),
-
-          Positioned(
-            top: 15,
-            left: 20,
-            child: Text(
-              instrumentController.songName.value == '게임 방법'
-                  ? instrumentController.songName.value
-                  : "${instrumentController.songName.value} - ${instrumentController.instrumentName.value}",
-              style: TextStyle(
-                fontFamily: 'SolmoeFont',
-                fontSize: 30,
-                color: Color(0xFFEDEAE6),
-              ),
+    return Stack(
+      children: [
+        Positioned.fill(
+            child: Image.asset(
+              'assets/images/background/배경화면2.png',
+              fit: BoxFit.cover,
             ),
-          ),
-
-          const Center(
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBarWithoutPercentBar(),
+          body: Center(
             child: Text(
               '정보를 불러오고 있습니다!\n잠시만 기다려주세요...',
               textAlign: TextAlign.center,
@@ -72,8 +60,9 @@ class _LoadingPrepareScreenState extends State<LoadingPrepareScreen> {
               ),
             ),
           ),
-        ],
-      ),
+          bottomNavigationBar: SizedBox(height: 33,),
+        )
+      ],
     );
   }
 }

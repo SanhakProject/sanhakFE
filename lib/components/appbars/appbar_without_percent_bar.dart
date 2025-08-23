@@ -12,16 +12,19 @@ class AppBarWithoutPercentBar extends StatelessWidget implements PreferredSizeWi
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
-      leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.white,)
-      ),
+      automaticallyImplyLeading: false,
+      // leading: IconButton(
+      //     onPressed: () => Get.back(),
+      //     icon: const Icon(Icons.arrow_back_ios, color: Colors.white,)
+      // ),
       title: Row(
         children: [
           Text(
-            "${controller.songName.value} - ${controller.instrumentName.value}",
+            controller.songName.value == '게임 방법'
+                ? controller.songName.value
+                : "${controller.songName.value} - ${controller.instrumentName.value}",
             style: TextStyle(
-              fontSize: 30,
+              fontSize: 24,
               color: Colors.white,
             ),
           ),
