@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sanhak/views/rule/rule_step1_screen.dart';
 
 import 'instrument_screen.dart';
+import '../record/record_screen.dart';
 
 class HomeButton extends StatelessWidget {
   const HomeButton({super.key});
@@ -12,18 +13,21 @@ class HomeButton extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(
-          'assets/images/buttons/지난기록.png',
-          width: 192,
-        ),
+        // 지난기록: RecordPage로 이동
         GestureDetector(
+          onTap: () => Get.to(() => const RecordPage()),
+          child: Image.asset(
+            'assets/images/buttons/지난기록.png',
+            width: 192,
+          ),
+        ),
+        // 연주하기
+        GestureDetector(
+          onTap: () => Get.to(() => const InstrumentScreen()),
           child: Image.asset(
             'assets/images/buttons/연주하기.png',
             width: 240,
           ),
-          onTap: () {
-            Get.to(() => InstrumentScreen());
-          },
         ),
         GestureDetector(
           child: Image.asset(
