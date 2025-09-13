@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sanhak/views/result/result_screen.dart'; // 결과 페이지 import
+import 'package:get/get.dart';
+
+import '../result/result_screen.dart';
 
 class RecordCard extends StatelessWidget {
   const RecordCard({
@@ -19,17 +21,10 @@ class RecordCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
 
     return GestureDetector(
       onTap: () {
-        // ✅ 카드 클릭 시 ResultScreen으로 이동
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const ResultScreen(),
-          ),
-        );
+        Get.to(() => ResultScreen());
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
