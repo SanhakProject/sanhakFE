@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sanhak/views/rule/rule_step1_screen.dart';
 
+import '../rule/rule_step1_screen.dart';
 import 'instrument_screen.dart';
 import '../record/record_screen.dart';
 
