@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 import '../../views/home/home_screen.dart';
 
+
+// TODO: 버튼 클릭 시 decibel controller 해제
 void exitDialog() {
   Get.dialog(
     AlertDialog(
