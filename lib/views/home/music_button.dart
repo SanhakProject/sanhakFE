@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/instrument_page_controller.dart';
+import '../../services/before_game/music_list.dart';
+import '../../models/track_summary.dart';
 
 class MusicButton extends StatefulWidget {
   const MusicButton({super.key});
@@ -15,21 +17,58 @@ class _MusicButtonState extends State<MusicButton> {
     viewportFraction: 0.35,
     initialPage: 1,
   );
-  
+
   int _currentIndex = 1;
-  
-  final List<Map<String, dynamic>> musics = [
-    {'title': '아리랑', 'level': '어려움', 'accuracy': 0},
-    {'title': '별달거리', 'level': '보통', 'accuracy': 80},
-    {'title': '영남농악', 'level': '어려움', 'accuracy': 50},
-    {'title': '휘모리', 'level': '쉬움', 'accuracy': 100},
-  ];
+  final MusicListService _musicListService = MusicListService();
+  List<TrackSummary> musics = [];
+  bool isLoading = true;
+
+  // final List<Map<String, dynamic>> musics = [
+  //   {'title': '아리랑', 'level': '어려움', 'accuracy': 0},
+  //   {'title': '별달거리', 'level': '보통', 'accuracy': 80},
+  //   {'title': '영남농악', 'level': '어려움', 'accuracy': 50},
+  //   {'title': '휘모리', 'level': '쉬움', 'accuracy': 100},
+  // ];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadMusicList();
+  }
+
+  Future<void> _loadMusicList() async {
+    try {
+      final controller = Get.find<InstrumentPageController>();
+      final response = await _musicListService.getMusicList(controller.instrumentName.value);
+      setState(() {
+        musics = response.tracks;
+        isLoading = false;
+        if (musics.isNotEmpty && _currentIndex >= musics.length) {
+          _currentIndex = musics.length > 1 ? 1 : 0;
+        }
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      // 에러 처리
+      print('Error loading music list: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final controller = Get.find<InstrumentPageController>();
+
+    if (isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+
+    if (musics.isEmpty) {
+      return Center(child: Text('음악 목록이 없습니다.', style: TextStyle(color: Colors.white)));
+    }
 
     return Column(
       children: [
@@ -46,7 +85,7 @@ class _MusicButtonState extends State<MusicButton> {
             itemBuilder: (context, index) {
               final item = musics[index];
               final isCenter = index == _currentIndex;
-              
+
               return AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
                 margin: EdgeInsets.symmetric(
@@ -64,8 +103,8 @@ class _MusicButtonState extends State<MusicButton> {
                           end: Alignment.bottomCenter,
                         )
                       : null,
-                        color: isCenter 
-                          ? null 
+                        color: isCenter
+                          ? null
                           : Colors.white.withAlpha(200),
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
@@ -85,7 +124,7 @@ class _MusicButtonState extends State<MusicButton> {
 
           TextButton(
             onPressed: () {
-              controller.getSongName(musics[_currentIndex]['title']);
+              controller.getSongName(musics[_currentIndex].title);
               // TODO: 선택한 노래 이름 저장 후 페이지 이동
             },
             style: TextButton.styleFrom(
@@ -115,13 +154,32 @@ class _MusicButtonState extends State<MusicButton> {
     );
   }
 
-  Widget _buildCenterCard(Map<String, dynamic> item) {
+  Widget _buildCenterCard(TrackSummary item) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
+    // difficulty를 한글 매핑
+    String getDifficultyKorean(String difficulty) {
+      switch (difficulty.toUpperCase()) {
+        case 'EASY':
+          return '쉬움';
+        case 'MEDIUM':
+          return '보통';
+        case 'HARD':
+          return '어려움';
+        default:
+          return '보통';
+      }
+    }
+
+    // bestScore기반 정확도 계산 (최대 점수 100점?)
+    int accuracy = ((item.record.bestScore / 1000) * 100).round();
+
+    String level = getDifficultyKorean(item.difficulty);
+
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: width * 0.02, 
+        horizontal: width * 0.02,
         vertical: height * 0.02
         ),
       child: Stack(
@@ -133,23 +191,23 @@ class _MusicButtonState extends State<MusicButton> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _buildDifficultyButton('쉬움', item['level'] == '쉬움'),
+                  _buildDifficultyButton('쉬움', level == '쉬움'),
                   SizedBox(width: width * 0.005),
-                  _buildDifficultyButton('보통', item['level'] == '보통'),
+                  _buildDifficultyButton('보통', level == '보통'),
                   SizedBox(width: width * 0.005),
-                  _buildDifficultyButton('어려움', item['level'] == '어려움'),
+                  _buildDifficultyButton('어려움', level == '어려움'),
                 ],
               ),
               SizedBox(height: height * 0.12),
               Center(
                 child: Text(
-                  item['title']!,
+                  item.title,
                   style: const TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
-                ),  
+                ),
               ),
             ],
           ),
@@ -157,7 +215,7 @@ class _MusicButtonState extends State<MusicButton> {
             bottom: 0,
             right: 0,
             child: Text(
-              '${item['accuracy']}% 정확도',
+              '$accuracy% 정확도',
               style: const TextStyle(
                 fontSize: 18,
                 color: Colors.black87,
@@ -169,10 +227,10 @@ class _MusicButtonState extends State<MusicButton> {
     );
   }
 
-  Widget _buildSideCard(Map<String, dynamic> item) {
+  Widget _buildSideCard(TrackSummary item) {
     return Center(
       child: Text(
-        item['title']!,
+        item.title,
         style: const TextStyle(
           fontSize: 28,
           color: Colors.black,
