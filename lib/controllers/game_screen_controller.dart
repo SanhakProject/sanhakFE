@@ -10,6 +10,7 @@ class GameScreenController extends GetxController {
   RxList<String> currentMeasure = <String>[].obs;
   RxList<String> nextMeasure = <String>[].obs;
 
+
   Future<void> fetchMeasures() async {
     try {
       final rawData = await dummyDataService();

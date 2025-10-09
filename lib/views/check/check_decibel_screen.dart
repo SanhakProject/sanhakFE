@@ -27,7 +27,7 @@ class _CheckDecibelScreenState extends State<CheckDecibelScreen> {
 
   @override
   void dispose() {
-    controller.stopCheck();
+    controller.resetCheck();
     super.dispose();
   }
 
