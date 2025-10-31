@@ -60,5 +60,13 @@ flutter:
 
     - assets/images/texts/GREAT!.png
 
-    - assets/dummy/dummy_data.json
-    - assets/dummy/dummy_music.mp3
+    - assets/music/easy.mp3
+    - assets/music/mid.mp3
+    - assets/music/hard.mp3
+
+    - assets/dummy/easy_janggu.json
+    - assets/dummy/easy_drum.json
+    - assets/dummy/easy_ggueng.json
+    - assets/dummy/easy_jing.json
+
+    - assets/dummy/hard_drum.json
