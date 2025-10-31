@@ -19,10 +19,9 @@ class _MusicButtonState extends State<MusicButton> {
   int _currentIndex = 1;
   
   final List<Map<String, dynamic>> musics = [
-    {'title': '아리랑', 'level': '어려움', 'accuracy': 0},
-    {'title': '별달거리', 'level': '보통', 'accuracy': 80},
-    {'title': '영남농악', 'level': '어려움', 'accuracy': 50},
-    {'title': '휘모리', 'level': '쉬움', 'accuracy': 100},
+    {'title': '꼬마야 꼬마야', 'level': '쉬움', 'accuracy': 80},
+    {'title': '도라지타령', 'level': '중간', 'accuracy': 50},
+    {'title': '아리랑', 'level': '어려움', 'accuracy': 100},
   ];
 
   @override
@@ -85,8 +84,8 @@ class _MusicButtonState extends State<MusicButton> {
 
           TextButton(
             onPressed: () {
-              controller.getSongName(musics[_currentIndex]['title']);
-              // TODO: 선택한 노래 이름 저장 후 페이지 이동
+              controller.getSongInfo(musics[_currentIndex]['title'], musics[_currentIndex]['level']);
+
             },
             style: TextButton.styleFrom(
               backgroundColor: Colors.transparent,

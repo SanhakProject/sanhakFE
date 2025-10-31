@@ -35,7 +35,7 @@ class _GameScreenState extends State<GameScreen> {
 
         decibelController.beginWindow();
 
-        await Future.delayed(const Duration(milliseconds: 173));
+        await Future.delayed(Duration(milliseconds: controller.interval.value));
 
         final maxDb = decibelController.endWindow();
         if (controller.allMeasures[j][i].isEmpty) {
@@ -60,7 +60,7 @@ class _GameScreenState extends State<GameScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(seconds: 1));
       musicController.playMusic();
-      await Future.delayed(const Duration(milliseconds: 1200));
+      await Future.delayed(Duration(milliseconds: controller.interlude.value));
       controller.updateMeasures();
       _startSequentialAnimation();
     });

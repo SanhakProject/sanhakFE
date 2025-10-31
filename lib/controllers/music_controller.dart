@@ -24,7 +24,7 @@ class MusicController extends GetxController {
 
   Future<void> playMusic() async {
     try {
-      await _player.setAsset('assets/dummy/dummy_music.mp3');
+      await _player.setAsset('assets/music/hard.mp3');
       await _player.seek(Duration.zero);
     } catch (e) {
       throw Exception("_initPlayer Error: $e");
