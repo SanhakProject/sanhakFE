@@ -5,6 +5,7 @@ import '../../components/appbars/appbar_with_percent_bar.dart';
 import '../../components/buttons/bottom_buttons.dart';
 import '../../components/icons/icon_with_name_first_line.dart';
 import '../../components/icons/icon_with_name_next_line.dart';
+import '../../controllers/check_decibel_page.controller.dart';
 import '../../controllers/game_screen_controller.dart';
 import '../../controllers/instrument_page_controller.dart';
 import '../../controllers/music_controller.dart';
@@ -22,20 +23,32 @@ class _GameScreenState extends State<GameScreen> {
   final controller = Get.find<GameScreenController>();
   final instrumentController = Get.find<InstrumentPageController>();
   final musicController = Get.find<MusicController>();
+  final decibelController = Get.find<CheckDecibelPageController>();
+
+  int _correct = 0;
+  int _wrong = 0;
 
   Future<void> _startSequentialAnimation() async {
     for (int j = 0; j < controller.totalMeasure.value; j++) {
       for (int i = 0; i < _isBig.length; i++) {
-        setState(() {
-          _isBig[i] = true;
-        });
-        await Future.delayed(const Duration(milliseconds: 173));
-        setState(() {
-          _isBig[i] = false;
-        });
+        setState(() {_isBig[i] = true;});
+
+        decibelController.beginWindow();
+
+        await Future.delayed(Duration(milliseconds: controller.interval.value));
+
+        final maxDb = decibelController.endWindow();
+        if (controller.allMeasures[j][i].isEmpty) {
+          if (maxDb < 75) {_correct += 1;} else {_wrong += 1;}
+        } else {
+          if (maxDb >= 75) {_correct += 1;} else {_wrong += 1;}
+        }
+        setState(() {_isBig[i] = false;});
       }
     }
     Future.delayed(const Duration(seconds: 5), () {
+      print('correct: $_correct');
+      print('wrong: $_wrong');
       Get.to(() => const ResultScreen());  // TODO: 로딩 화면으로 변경 예정
     });
   }
@@ -47,7 +60,7 @@ class _GameScreenState extends State<GameScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(seconds: 1));
       musicController.playMusic();
-      await Future.delayed(const Duration(milliseconds: 1200));
+      await Future.delayed(Duration(milliseconds: controller.interlude.value));
       controller.updateMeasures();
       _startSequentialAnimation();
     });
@@ -56,6 +69,7 @@ class _GameScreenState extends State<GameScreen> {
   @override
   void dispose() {
     super.dispose();
+    decibelController.noiseCheckCancel();
     musicController.stopMusic();
   }
 

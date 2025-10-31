@@ -12,7 +12,15 @@ class CheckDecibelPageController extends GetxController{
 
  String _initialText = '';
 
- late StreamSubscription<NoiseReading> _noiseCheck;
+ // Windowing (per-slot max dB)
+ bool _gate = false;
+ double _currentMaxDb = double.negativeInfinity;
+
+ // Noise stream (single reusable meter & nullable subscription)
+ final NoiseMeter _meter = NoiseMeter();
+ StreamSubscription<NoiseReading>? _noiseCheck;
+ bool _isListening = false;
+
  Timer? _changeTextTimer;
 
  // getter 추가
@@ -24,24 +32,38 @@ class CheckDecibelPageController extends GetxController{
     displayedText.value = text;
   }
 
- void checkDecibel() {
-   _noiseCheck = NoiseMeter().noise.listen(
-         (NoiseReading noiseReading) {
-       print('Noise: ${noiseReading.meanDecibel} dB');
-       if (noiseReading.meanDecibel > 80) {
-         overDecibel.value += 1;
-         if (overDecibel.value >= 3) {
-           stopCheck();
-           Get.to(() => LoadingPrepareScreen(gameMode: _initialText));
-         }
-       }
-     },
-     onError: (Object error) {
-       Get.snackbar('오류 발생!', "얘기치 못한 오류가 발생했습니다!");
-     },
-     cancelOnError: true,
-   );
- }
+  void checkDecibel() {
+    if (_isListening) return; // prevent duplicate listen
+    _isListening = true;
+
+    _noiseCheck = _meter.noise.listen(
+      (NoiseReading noiseReading) {
+        // Always feed the windowing logic so game-side max dB works
+        _onNoise(noiseReading);
+
+        // Only the initial screen should trigger navigation
+        if (Get.currentRoute == "/CheckDecibelScreen") {
+          final db = noiseReading.meanDecibel;
+          if (db > 80) {
+            overDecibel.value += 1;
+            if (overDecibel.value >= 3) {
+              resetCheck();
+              Get.to(() => LoadingPrepareScreen(gameMode: _initialText));
+            }
+          } else {
+            // Reset streak when below threshold (for "consecutive 3 times" semantics)
+            overDecibel.value = 0;
+          }
+        }
+      },
+      onError: (Object error) {
+        Get.snackbar('오류 발생!', "예기치 못한 오류가 발생했습니다!");
+        // Ensure resources are released on error
+        noiseCheckCancel();
+      },
+      cancelOnError: true,
+    );
+  }
 
  void changeText() {
    _changeTextTimer = Timer(Duration(seconds: 5), () {
@@ -49,10 +71,40 @@ class CheckDecibelPageController extends GetxController{
    });
  }
 
- void stopCheck() {
+ void _onNoise(NoiseReading r) {
+   if (!_gate) return;
+   final db = r.meanDecibel;
+   if (db > _currentMaxDb) _currentMaxDb = db;
+ }
+
+ void beginWindow() {
+   _currentMaxDb = double.negativeInfinity;
+   _gate = true;
+ }
+
+ double endWindow() {
+    _gate = false;
+    return _currentMaxDb.isFinite ? _currentMaxDb : 0.0;
+ }
+
+ void resetCheck() {
    displayedText.value = _initialText;
    overDecibel.value = 0;
    _changeTextTimer?.cancel();
-   _noiseCheck.cancel();
  }
+
+  Future<void> noiseCheckCancel() async {
+    try {
+      await _noiseCheck?.cancel();
+    } catch (_) {}
+    _noiseCheck = null;
+    _isListening = false;
+  }
+
+  @override
+  void onClose() {
+    // Ensure we release the stream if this controller is destroyed
+    noiseCheckCancel();
+    super.onClose();
+  }
 }
