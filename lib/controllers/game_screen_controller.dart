@@ -1,14 +1,18 @@
 import 'package:get/get.dart';
-import 'package:sanhak/services/easy_drum_service.dart';
-import 'package:sanhak/services/easy_ggueng_service.dart';
-import 'package:sanhak/services/easy_jing_service.dart';
 
 import '../helpers/filter_interlude.dart';
 import '../helpers/filter_interval.dart';
 import '../helpers/filter_line_change.dart';
 import '../helpers/filter_measure.dart';
 import '../helpers/filter_total_measure.dart';
+import '../services/easy_drum_service.dart';
+import '../services/easy_ggueng_service.dart';
 import '../services/easy_janggu_service.dart';
+import '../services/easy_jing_service.dart';
+import '../services/hard_drum_service.dart';
+import '../services/hard_ggueng_service.dart';
+import '../services/hard_janggu_service.dart';
+import '../services/hard_jing_service.dart';
 import 'instrument_page_controller.dart';
 
 class GameScreenController extends GetxController {
@@ -36,6 +40,14 @@ class GameScreenController extends GetxController {
         rawData = await easyJingService();
       } else if (instrumentName == '꽹과리' && songLevel == '쉬움') {
         rawData = await easyGguengService();
+      } else if (instrumentName == '북' && songLevel == '어려움') {
+        rawData = await hardDrumService();
+      } else if (instrumentName == '장구' && songLevel == '어려움') {
+        rawData = await hardJangguService();
+      } else if (instrumentName == '징' && songLevel == '어려움') {
+        rawData = await hardJingService();
+      } else if (instrumentName == '꽹과리' && songLevel == '어려움') {
+        rawData = await hardGguengService();
       }
 
       totalMeasure.value = await filterTotalMeasure(rawData);
