@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 
-Future<Map<String, dynamic>> dummyDataService() async {
+Future<Map<String, dynamic>> easyGguengService() async {
   try {
-    final String jsonString = await rootBundle.loadString('assets/dummy/dummy_data.json');
+    final String jsonString = await rootBundle.loadString('assets/dummy/easy_ggueng.json');
     final Map<String, dynamic> jsonData = json.decode(jsonString);
     return jsonData;
   } catch (e) {
