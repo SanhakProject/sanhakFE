@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/login_page_controller.dart';
+import '../../utils/phone_number_formatter.dart';
 
 /// controller (Get.put) 선언은 앱 초기에 설정 (provider.dart)
 
@@ -21,6 +22,7 @@ class PhoneRegisterButton extends StatelessWidget {
           width: width * 0.3,
           height: height * 0.11,
           child: TextFormField(
+            onChanged: (value) => controller.name.value = value,
             decoration: InputDecoration(
               hintText: '이름',
               hintStyle: TextStyle(color: Color(0xffEDD154)),
@@ -49,6 +51,9 @@ class PhoneRegisterButton extends StatelessWidget {
           width: width * 0.3,
           height: height * 0.11,
           child: TextFormField(
+            onChanged: (value) => controller.phoneNumber.value = value,
+            keyboardType: TextInputType.phone,
+            inputFormatters: [PhoneNumberFormatter()],
             decoration: InputDecoration(
               hintText: '전화번호',
               hintStyle: TextStyle(color: Color(0xffEDD154)),
@@ -77,6 +82,8 @@ class PhoneRegisterButton extends StatelessWidget {
           width: width * 0.3,
           height: height * 0.11,
           child: TextFormField(
+            onChanged: (value) => controller.password.value = value,
+            obscureText: true,
             decoration: InputDecoration(
               hintText: '비밀번호',
               hintStyle: TextStyle(color: Color(0xffEDD154)),
@@ -105,6 +112,8 @@ class PhoneRegisterButton extends StatelessWidget {
           width: width * 0.3,
           height: height * 0.11,
           child: TextFormField(
+            onChanged: (value) => controller.passwordConfirm.value = value,
+            obscureText: true,
             decoration: InputDecoration(
               hintText: '비밀번호 확인',
               hintStyle: TextStyle(color: Color(0xffEDD154)),
