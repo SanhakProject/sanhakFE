@@ -4,10 +4,12 @@ import '../views/home/home_screen.dart';
 import '../views/phone_login/phone_login_screen.dart';
 import '../services/auth/auth_service.dart';
 import '../services/auth/token_storage_service.dart';
+import '../services/auth/kakao_login_service.dart';
 
 class LoginPageController extends GetxController {
   final AuthService _authService = AuthService();
   final TokenStorageService _tokenStorage = TokenStorageService();
+  final KakaoLoginService _kakaoLoginService = KakaoLoginService();
   Rx<bool> isLoading = false.obs;
 
   // 회원가입 입력 필드
@@ -19,10 +21,34 @@ class LoginPageController extends GetxController {
   Future<void> kakaoLogin() async {
     isLoading.value = true;
     try {
-      //TODO: 카카오 로그인 실행
-      Get.offAll(() => HomeScreen());
+      // 1. 카카오 SDK로 로그인하여 ID 토큰 받기
+      final kakaoIdToken = await _kakaoLoginService.loginAndGetIdToken();
+
+      if (kakaoIdToken == null) {
+        Get.snackbar("로그인 실패", "카카오 ID 토큰을 받을 수 없습니다");
+        return;
+      }
+
+      // 2. 카카오 ID 토큰으로 백엔드 서버에 로그인 요청
+      final response = await _authService.kakaoLogin(
+        kakaoAccessToken: kakaoIdToken,
+      );
+
+      if (response.status == 200 && response.data != null) {
+        // 3. 백엔드 JWT 토큰 저장
+        final tokens = response.data!;
+        await _tokenStorage.saveTokens(
+          accessToken: tokens.accessToken,
+          refreshToken: tokens.refreshToken,
+        );
+
+        Get.snackbar("로그인 성공", response.message);
+        Get.offAll(() => HomeScreen());
+      } else {
+        Get.snackbar("로그인 실패", response.message);
+      }
     } catch (e) {
-      Get.snackbar("로그인 실패", "다시 시도해주세요");
+      Get.snackbar("로그인 실패", "카카오 로그인에 실패했습니다: $e");
     } finally {
       isLoading.value = false;
     }

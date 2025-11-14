@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import '../../models/auth/signup_request.dart';
 import '../../models/auth/login_request.dart';
+import '../../models/auth/kakao_login_request.dart';
 import '../../models/auth/token_response.dart';
 import '../../models/auth/api_response.dart';
 
@@ -72,6 +73,35 @@ class AuthService {
     } on DioException catch (e) {
       if (e.response != null) {
         throw Exception('로그인 실패: ${e.response?.data['message'] ?? e.message}');
+      }
+      throw Exception('네트워크 오류 발생: ${e.message}');
+    }
+  }
+
+  Future<ApiResponse<TokenResponse>> kakaoLogin({
+    required String kakaoAccessToken,
+  }) async {
+    try {
+      final request = KakaoLoginRequest(
+        kakaoAccessToken: kakaoAccessToken,
+      );
+
+      final response = await _dio.post(
+        '/auth/oauth2/kakao',
+        data: request.toJson(),
+      );
+
+      if (response.statusCode == 200) {
+        return ApiResponse<TokenResponse>.fromJson(
+          response.data,
+          (data) => TokenResponse.fromJson(data as Map<String, dynamic>),
+        );
+      } else {
+        throw Exception('카카오 로그인에 실패했습니다.');
+      }
+    } on DioException catch (e) {
+      if (e.response != null) {
+        throw Exception('카카오 로그인 실패: ${e.response?.data['message'] ?? e.message}');
       }
       throw Exception('네트워크 오류 발생: ${e.message}');
     }
