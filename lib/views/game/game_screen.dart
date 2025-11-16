@@ -19,7 +19,7 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  final List<bool> _isBig = List.generate(8, (_) => false);
+  late List<bool> _isBig;
   final controller = Get.find<GameScreenController>();
   final instrumentController = Get.find<InstrumentPageController>();
   final musicController = Get.find<MusicController>();
@@ -57,6 +57,8 @@ class _GameScreenState extends State<GameScreen> {
   void initState() {
     super.initState();
 
+    _isBig = List.generate(controller.oneLineMeasure.value, (_) => false);
+
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(seconds: 1));
       musicController.playMusic();
@@ -90,7 +92,7 @@ class _GameScreenState extends State<GameScreen> {
           body: Column(
             children: [
               Obx(() => Expanded(
-                child: (controller.currentMeasure.length == 8)
+                child: (controller.currentMeasure.length == controller.oneLineMeasure.value)
                     ? Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -98,7 +100,7 @@ class _GameScreenState extends State<GameScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 15.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: List.generate(8, (i) {
+                        children: List.generate(controller.oneLineMeasure.value, (i) {
                           return controller.currentMeasure.length > i && controller.currentMeasure[i].isNotEmpty
                               ? Transform.scale(
                             scale: _isBig[i] ? 1.5 : 1.0,
@@ -116,8 +118,8 @@ class _GameScreenState extends State<GameScreen> {
                       children: [
                         SizedBox(width: width * 0.3333),
                         ...(
-                            controller.nextMeasure.length == 8
-                                ? List.generate(8, (i) {
+                            controller.nextMeasure.length == controller.oneLineMeasure.value
+                                ? List.generate(controller.oneLineMeasure.value, (i) {
                               return controller.nextMeasure[i].isNotEmpty
                                   ? IconWithNameNextLine(
                                 name: controller.nextMeasure[i],
