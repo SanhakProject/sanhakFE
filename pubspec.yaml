@@ -69,4 +69,12 @@ flutter:
     - assets/dummy/easy_ggueng.json
     - assets/dummy/easy_jing.json
 
+    - assets/dummy/hard_janggu.json
     - assets/dummy/hard_drum.json
+    - assets/dummy/hard_ggueng.json
+    - assets/dummy/hard_jing.json
+
+    - assets/dummy/mid_drum.json
+    - assets/dummy/mid_ggueng.json
+    - assets/dummy/mid_jing.json
+    - assets/dummy/mid_janggu.json
