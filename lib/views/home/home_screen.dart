@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                '게임이름',
+                '아리노리',
                 style: TextStyle(color: Colors.white, fontSize: 35),
               ),
               HomeButton(),
