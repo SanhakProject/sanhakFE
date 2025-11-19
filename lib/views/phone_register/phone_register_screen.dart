@@ -18,6 +18,7 @@ class PhoneRegisterScreen extends StatelessWidget {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
+          resizeToAvoidBottomInset: false,
           appBar: BackIconAppBar(),
           body: Column(
             children: [
