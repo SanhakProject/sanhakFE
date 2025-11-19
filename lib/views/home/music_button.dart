@@ -51,8 +51,6 @@ class _MusicButtonState extends State<MusicButton> {
       setState(() {
         isLoading = false;
       });
-      // 에러 처리
-      print('Error loading music list: $e');
     }
   }
 

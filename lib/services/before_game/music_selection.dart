@@ -3,12 +3,11 @@ import '../../models/track_sheet_grid.dart';
 
 class MusicSelectionService {
   final Dio _dio = Dio();
-  final String baseUrl = 'v0/';
 
   Future<TrackSheetGrid> getTrackSheet(int trackId, String instrument) async {
     try {
       final response = await _dio.get(
-        '$baseUrl/tracks/$trackId/$instrument',
+        '/tracks/$trackId/$instrument',
       );
 
       if (response.statusCode == 200) {
