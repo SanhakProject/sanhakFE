@@ -20,7 +20,7 @@ class LoginScreen extends StatelessWidget {
               const Spacer(flex: 3),
               const Center(
                 child: Text(
-                  '게임이름',
+                  '아리노리',
                   style: TextStyle(color: Colors.white, fontSize: 64),
                 ),
               ),
