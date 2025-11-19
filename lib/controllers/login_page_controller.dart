@@ -21,21 +21,18 @@ class LoginPageController extends GetxController {
   Future<void> kakaoLogin() async {
     isLoading.value = true;
     try {
-      // 1. 카카오 SDK로 로그인하여 ID 토큰 받기
-      final kakaoIdToken = await _kakaoLoginService.loginAndGetIdToken();
+      final kakaoAccessToken = await _kakaoLoginService.loginAndGetAccessToken();
 
-      if (kakaoIdToken == null) {
-        Get.snackbar("로그인 실패", "카카오 ID 토큰을 받을 수 없습니다");
+      if (kakaoAccessToken == null) {
+        Get.snackbar("로그인 실패", "카카오 액세스 토큰을 받을 수 없습니다");
         return;
       }
-
-      // 2. 카카오 ID 토큰으로 백엔드 서버에 로그인 요청
       final response = await _authService.kakaoLogin(
-        kakaoAccessToken: kakaoIdToken,
+        kakaoAccessToken: kakaoAccessToken,
       );
 
+
       if (response.status == 200 && response.data != null) {
-        // 3. 백엔드 JWT 토큰 저장
         final tokens = response.data!;
         await _tokenStorage.saveTokens(
           accessToken: tokens.accessToken,
@@ -95,6 +92,20 @@ class LoginPageController extends GetxController {
     // 입력값 검증
     if (name.value.isEmpty || phoneNumber.value.isEmpty || password.value.isEmpty) {
       Get.snackbar("입력 오류", "모든 필드를 입력해주세요");
+      return;
+    }
+
+    // 이름 유효성 검사 (한글, 영문, 괄호, 공백만 허용, 2자 이상)
+    final nameRegex = RegExp(r'^[가-힣a-zA-Z()\s]{2,}$');
+    if (!nameRegex.hasMatch(name.value)) {
+      Get.snackbar("입력 오류", "이름은 한글, 영문, 괄호, 공백을 포함해 2자 이상 입력해주세요");
+      return;
+    }
+
+    // 비밀번호 유효성 검사 (대문자, 소문자, 숫자, 특수문자 포함)
+    final passwordRegex = RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$');
+    if (!passwordRegex.hasMatch(password.value)) {
+      Get.snackbar("입력 오류", "비밀번호는 대문자, 소문자, 숫자, 특수문자를 포함해 8자 이상이어야 합니다");
       return;
     }
 

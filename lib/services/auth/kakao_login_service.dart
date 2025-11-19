@@ -1,8 +1,8 @@
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 class KakaoLoginService {
-  // 카카오 로그인 및 ID 토큰 발급
-  Future<String?> loginAndGetIdToken() async {
+  // 카카오 로그인 및 액세스 토큰 발급
+  Future<String?> loginAndGetAccessToken() async {
     try {
       // 카카오톡 설치 여부 확인
       final installed = await isKakaoTalkInstalled();
@@ -21,8 +21,8 @@ class KakaoLoginService {
         token = await UserApi.instance.loginWithKakaoAccount();
       }
 
-      // ID 토큰 반환 (accessToken이 아닌 idToken)
-      return token.idToken;
+      // 액세스 토큰 반환
+      return token.accessToken;
     } catch (e) {
       throw Exception('카카오 로그인 실패: $e');
     }
