@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class LoadingResultWaitScreen extends StatelessWidget {
+import '../../controllers/result_screen_controller.dart';
+
+class LoadingResultWaitScreen extends StatefulWidget {
   const LoadingResultWaitScreen({super.key});
 
+  @override
+  State<LoadingResultWaitScreen> createState() => _LoadingResultWaitScreenState();
+}
+
+class _LoadingResultWaitScreenState extends State<LoadingResultWaitScreen> {
+  final controller = Get.find<ResultScreenController>();
+
+  @override
+  void initState() {
+    super.initState();
+    controller.fetchResultData();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

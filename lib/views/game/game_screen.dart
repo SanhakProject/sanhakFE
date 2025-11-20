@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,7 +11,8 @@ import '../../controllers/check_decibel_page.controller.dart';
 import '../../controllers/game_screen_controller.dart';
 import '../../controllers/instrument_page_controller.dart';
 import '../../controllers/music_controller.dart';
-import '../result/result_screen.dart';
+import '../../controllers/result_screen_controller.dart';
+import '../loading/loading_result_wait_screen.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -19,7 +22,7 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  final List<bool> _isBig = List.generate(8, (_) => false);
+  late List<bool> _isBig;
   final controller = Get.find<GameScreenController>();
   final instrumentController = Get.find<InstrumentPageController>();
   final musicController = Get.find<MusicController>();
@@ -27,35 +30,55 @@ class _GameScreenState extends State<GameScreen> {
 
   int _correct = 0;
   int _wrong = 0;
+  int _combo = 0;
+  final List<int> _comboList = [];
 
   Future<void> _startSequentialAnimation() async {
     for (int j = 0; j < controller.totalMeasure.value; j++) {
+      final List<String> playedNotes = [];
       for (int i = 0; i < _isBig.length; i++) {
         setState(() {_isBig[i] = true;});
-
         decibelController.beginWindow();
 
         await Future.delayed(Duration(milliseconds: controller.interval.value));
 
         final maxDb = decibelController.endWindow();
         if (controller.allMeasures[j][i].isEmpty) {
-          if (maxDb < 75) {_correct += 1;} else {_wrong += 1;}
+          if (maxDb < 75) {
+            _correct += 1; _combo += 1;
+            playedNotes.add('correct');
+          } else {
+            _wrong += 1; _comboList.add(_combo); _combo = 0;
+            playedNotes.add('wrong');
+          }
         } else {
-          if (maxDb >= 75) {_correct += 1;} else {_wrong += 1;}
+          if (maxDb >= 75) {
+            _correct += 1; _combo += 1;
+            playedNotes.add('correct');
+          } else {
+            _wrong += 1; _comboList.add(_combo); _combo = 0;
+            playedNotes.add('wrong');
+          }
         }
         setState(() {_isBig[i] = false;});
       }
+      controller.totalPlayedNotes.add(playedNotes);
     }
     Future.delayed(const Duration(seconds: 5), () {
-      print('correct: $_correct');
-      print('wrong: $_wrong');
-      Get.to(() => const ResultScreen());  // TODO: 로딩 화면으로 변경 예정
+      final resultController = Get.find<ResultScreenController>();
+      resultController.correctNotes.value = _correct;
+      resultController.wrongNotes.value = _wrong;
+      final comboMax = _comboList.isNotEmpty ? _comboList.reduce(max) : 0;
+      resultController.combo.value = comboMax;
+      Get.to(() => const LoadingResultWaitScreen());
     });
   }
 
   @override
   void initState() {
     super.initState();
+
+    _isBig = List.generate(controller.oneLineMeasure.value, (_) => false);
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(seconds: 1));
@@ -90,7 +113,7 @@ class _GameScreenState extends State<GameScreen> {
           body: Column(
             children: [
               Obx(() => Expanded(
-                child: (controller.currentMeasure.length == 8)
+                child: (controller.currentMeasure.length == controller.oneLineMeasure.value)
                     ? Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -98,7 +121,7 @@ class _GameScreenState extends State<GameScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 15.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: List.generate(8, (i) {
+                        children: List.generate(controller.oneLineMeasure.value, (i) {
                           return controller.currentMeasure.length > i && controller.currentMeasure[i].isNotEmpty
                               ? Transform.scale(
                             scale: _isBig[i] ? 1.5 : 1.0,
@@ -116,8 +139,8 @@ class _GameScreenState extends State<GameScreen> {
                       children: [
                         SizedBox(width: width * 0.3333),
                         ...(
-                            controller.nextMeasure.length == 8
-                                ? List.generate(8, (i) {
+                            controller.nextMeasure.length == controller.oneLineMeasure.value
+                                ? List.generate(controller.oneLineMeasure.value, (i) {
                               return controller.nextMeasure[i].isNotEmpty
                                   ? IconWithNameNextLine(
                                 name: controller.nextMeasure[i],

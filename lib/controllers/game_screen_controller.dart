@@ -4,6 +4,7 @@ import '../helpers/filter_interlude.dart';
 import '../helpers/filter_interval.dart';
 import '../helpers/filter_line_change.dart';
 import '../helpers/filter_measure.dart';
+import '../helpers/filter_one_line_measure.dart';
 import '../helpers/filter_total_measure.dart';
 import '../services/easy_drum_service.dart';
 import '../services/easy_ggueng_service.dart';
@@ -13,16 +14,21 @@ import '../services/hard_drum_service.dart';
 import '../services/hard_ggueng_service.dart';
 import '../services/hard_janggu_service.dart';
 import '../services/hard_jing_service.dart';
+import '../services/mid_drum_service.dart';
 import 'instrument_page_controller.dart';
 
 class GameScreenController extends GetxController {
   Rx<int> totalMeasure = 0.obs;
   RxList<List<String>> allMeasures = <List<String>>[].obs;
+  RxList<List<String>> copyAllMeasures = <List<String>>[].obs;
   RxList<String> currentMeasure = <String>[].obs;
   RxList<String> nextMeasure = <String>[].obs;
   Rx<int> interval = 0.obs;
   Rx<int> lineChange = 0.obs;
   Rx<int> interlude = 0.obs;
+  Rx<int> oneLineMeasure = 0.obs;
+
+  RxList<List<String>> totalPlayedNotes = <List<String>>[].obs;
 
   Future<void> fetchMeasures() async {
     try {
@@ -48,13 +54,23 @@ class GameScreenController extends GetxController {
         rawData = await hardJingService();
       } else if (instrumentName == '꽹과리' && songLevel == '어려움') {
         rawData = await hardGguengService();
+      } else if (instrumentName == '북' && songLevel == '보통') {
+        rawData = await midDrumService();
+      } else if (instrumentName == '장구' && songLevel == '어려움') {
+        rawData = await hardJangguService();
+      } else if (instrumentName == '징' && songLevel == '어려움') {
+        rawData = await hardJingService();
+      } else if (instrumentName == '꽹과리' && songLevel == '어려움') {
+        rawData = await hardGguengService();
       }
 
       totalMeasure.value = await filterTotalMeasure(rawData);
       allMeasures.value = await filterMeasure(rawData);
+      copyAllMeasures.value = await filterMeasure(rawData);
       interval.value = await filterInterval(rawData);
       lineChange.value = await filterLineChange(rawData);
       interlude.value = await filterInterlude(rawData);
+      oneLineMeasure.value = await filterOneLineMeasure(rawData);
       currentMeasure.value = allMeasures[0];
       nextMeasure.value = allMeasures[1];
     } catch (e) {

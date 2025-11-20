@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../check/check_tts_screen.dart';
 import '../home/home_screen.dart';
+import '../wrong/wrong_page.dart';
 
-/// Get navigator 를 사용할 꺼 같습니다! (메모리 관리, 화면 넘어가는 애니메이션 등 여러 가지 이유) (Get.to, Get.back, Get.offall)
 
 class ResultButtons extends StatelessWidget {
   const ResultButtons({super.key});
@@ -45,7 +44,7 @@ class ResultButtons extends StatelessWidget {
           height: 45,
           child: ElevatedButton(
             onPressed: () {
-              Get.to(() => CheckTTSScreen());
+              Get.to(() => WrongPage());
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFFEDD154),
