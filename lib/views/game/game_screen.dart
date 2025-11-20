@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,7 +11,8 @@ import '../../controllers/check_decibel_page.controller.dart';
 import '../../controllers/game_screen_controller.dart';
 import '../../controllers/instrument_page_controller.dart';
 import '../../controllers/music_controller.dart';
-import '../result/result_screen.dart';
+import '../../controllers/result_screen_controller.dart';
+import '../loading/loading_result_wait_screen.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -27,29 +30,47 @@ class _GameScreenState extends State<GameScreen> {
 
   int _correct = 0;
   int _wrong = 0;
+  int _combo = 0;
+  final List<int> _comboList = [];
 
   Future<void> _startSequentialAnimation() async {
     for (int j = 0; j < controller.totalMeasure.value; j++) {
+      final List<String> playedNotes = [];
       for (int i = 0; i < _isBig.length; i++) {
         setState(() {_isBig[i] = true;});
-
         decibelController.beginWindow();
 
         await Future.delayed(Duration(milliseconds: controller.interval.value));
 
         final maxDb = decibelController.endWindow();
         if (controller.allMeasures[j][i].isEmpty) {
-          if (maxDb < 75) {_correct += 1;} else {_wrong += 1;}
+          if (maxDb < 75) {
+            _correct += 1; _combo += 1;
+            playedNotes.add('correct');
+          } else {
+            _wrong += 1; _comboList.add(_combo); _combo = 0;
+            playedNotes.add('wrong');
+          }
         } else {
-          if (maxDb >= 75) {_correct += 1;} else {_wrong += 1;}
+          if (maxDb >= 75) {
+            _correct += 1; _combo += 1;
+            playedNotes.add('correct');
+          } else {
+            _wrong += 1; _comboList.add(_combo); _combo = 0;
+            playedNotes.add('wrong');
+          }
         }
         setState(() {_isBig[i] = false;});
       }
+      controller.totalPlayedNotes.add(playedNotes);
     }
     Future.delayed(const Duration(seconds: 5), () {
-      print('correct: $_correct');
-      print('wrong: $_wrong');
-      Get.to(() => const ResultScreen());  // TODO: 로딩 화면으로 변경 예정
+      final resultController = Get.find<ResultScreenController>();
+      resultController.correctNotes.value = _correct;
+      resultController.wrongNotes.value = _wrong;
+      final comboMax = _comboList.isNotEmpty ? _comboList.reduce(max) : 0;
+      resultController.combo.value = comboMax;
+      Get.to(() => const LoadingResultWaitScreen());
     });
   }
 
