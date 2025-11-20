@@ -58,6 +58,12 @@ flutter:
     - assets/images/icons/꽹과리.png
     - assets/images/icons/스피커.png
 
+    - assets/images/icons/wrong_북.png
+    - assets/images/icons/wrong_징.png
+    - assets/images/icons/wrong_장구.png
+    - assets/images/icons/wrong_꽹과리.png
+
+
     - assets/images/texts/GREAT!.png
 
     - assets/music/easy.mp3
