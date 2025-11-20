@@ -21,7 +21,7 @@ class InstrumentScreen extends StatelessWidget {
             children: [
               SizedBox(height: height * 0.06,),
               Text(
-                '게임이름',
+                '아리노리',
                 style: TextStyle(color: Colors.white, fontSize: 35),
               ),
               SizedBox(height: 20,),

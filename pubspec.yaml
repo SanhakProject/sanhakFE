@@ -19,6 +19,10 @@ dependencies:
   percent_indicator: ^4.2.2
   simple_animations: ^5.2.0
   just_audio: ^0.9.36
+  dio: ^5.9.0
+  flutter_secure_storage: ^9.2.4
+  kakao_flutter_sdk_user: ^1.9.7+3
+  flutter_dotenv: ^6.0.0
 
 dependency_overrides:
   audio_streamer: 4.2.0
@@ -39,6 +43,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - .env
     - assets/images/background/배경화면1.png
     - assets/images/background/배경화면2.png
     - assets/images/background/곡아이콘.png
