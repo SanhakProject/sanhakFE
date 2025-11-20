@@ -20,12 +20,15 @@ import 'instrument_page_controller.dart';
 class GameScreenController extends GetxController {
   Rx<int> totalMeasure = 0.obs;
   RxList<List<String>> allMeasures = <List<String>>[].obs;
+  RxList<List<String>> copyAllMeasures = <List<String>>[].obs;
   RxList<String> currentMeasure = <String>[].obs;
   RxList<String> nextMeasure = <String>[].obs;
   Rx<int> interval = 0.obs;
   Rx<int> lineChange = 0.obs;
   Rx<int> interlude = 0.obs;
   Rx<int> oneLineMeasure = 0.obs;
+
+  RxList<List<String>> totalPlayedNotes = <List<String>>[].obs;
 
   Future<void> fetchMeasures() async {
     try {
@@ -63,6 +66,7 @@ class GameScreenController extends GetxController {
 
       totalMeasure.value = await filterTotalMeasure(rawData);
       allMeasures.value = await filterMeasure(rawData);
+      copyAllMeasures.value = await filterMeasure(rawData);
       interval.value = await filterInterval(rawData);
       lineChange.value = await filterLineChange(rawData);
       interlude.value = await filterInterlude(rawData);
