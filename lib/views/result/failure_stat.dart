@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../controllers/result_screen_controller.dart';
 
 class FailureStat extends StatelessWidget {
   const FailureStat({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<ResultScreenController>();
+    final ratio = controller.wrongNotes.value /
+        (controller.wrongNotes.value + controller.correctNotes.value);
+
+    final percent = double.parse((ratio * 100).toStringAsFixed(1));
     return Container(
       width: 288,
       height: 62,
@@ -34,18 +42,18 @@ class FailureStat extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
-            children: const [
+            children: [
               Text(
-                '1234',
-                style: TextStyle(
+                '${controller.wrongNotes.value}',
+                style: const TextStyle(
                   fontSize: 32,
                   color: Colors.white,
                 ),
               ),
-              SizedBox(width: 4),
+              const SizedBox(width: 4),
               Text(
-                '(100%)',
-                style: TextStyle(
+                '($percent%)',
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white,
                 ),

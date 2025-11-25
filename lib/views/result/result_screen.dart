@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:sanhak/views/result/result_buttons.dart';
 import 'package:sanhak/views/result/success_stat.dart';
 
+import '../../controllers/instrument_page_controller.dart';
+import '../../controllers/result_screen_controller.dart';
 import 'consecutive_success_stat.dart';
 import 'failure_stat.dart';
 
@@ -10,6 +14,9 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<ResultScreenController>();
+    final formattedScore = NumberFormat('#,###').format(controller.score.value);
+    final instrumentController = Get.find<InstrumentPageController>();
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
@@ -47,45 +54,30 @@ class ResultScreen extends StatelessWidget {
                     color: Color(0xFFEDD154),
                   ),
                 ),
-                const Text(
-                  '12,345,678',
-                  style: TextStyle(
+                Text(
+                  formattedScore,
+                  style: const TextStyle(
                     fontSize: 48,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                 ),
-                const Text(
-                  '최고 점수: 12,345,678',
-                  style: TextStyle(
+                Text(
+                  '최고 점수: $formattedScore',
+                  style: const TextStyle(
                     fontSize: 20,
                     color: Colors.white,
                   ),
                 ),
                 const SizedBox(height: 14),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(4),
-                      child: Image.asset(
-                        'assets/images/background/곡아이콘.png',
-                        width: 80,
-                        height: 80,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    const Text(
-                      '별달거리\n어려움',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
+                const SizedBox(width: 8),
+                Text(
+                  '${instrumentController.songName}\n${instrumentController.songLevel}',
+                  textAlign: TextAlign.right,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),

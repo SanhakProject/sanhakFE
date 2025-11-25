@@ -5,16 +5,15 @@ import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'components/permissions/permission_handler.dart';
+import 'global_system_ui_controller.dart';
 import 'provider.dart';
 import 'views/login/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // 환경변수 로드
   await dotenv.load(fileName: ".env");
 
-  // 카카오 SDK 초기화
   KakaoSdk.init(
     nativeAppKey: dotenv.env['KAKAO_NATIVE_APP_KEY']!,
   );
@@ -26,6 +25,7 @@ void main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);  // 기기 앱바 무시
   await requestMicPermission();
   initControllers();
+  GlobalSystemUIController().init();
   runApp(const MyApp());
 }
 

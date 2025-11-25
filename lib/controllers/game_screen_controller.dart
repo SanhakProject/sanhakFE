@@ -6,15 +6,15 @@ import '../helpers/filter_line_change.dart';
 import '../helpers/filter_measure.dart';
 import '../helpers/filter_one_line_measure.dart';
 import '../helpers/filter_total_measure.dart';
-import '../services/easy_drum_service.dart';
-import '../services/easy_ggueng_service.dart';
-import '../services/easy_janggu_service.dart';
-import '../services/easy_jing_service.dart';
-import '../services/hard_drum_service.dart';
-import '../services/hard_ggueng_service.dart';
-import '../services/hard_janggu_service.dart';
-import '../services/hard_jing_service.dart';
-import '../services/mid_drum_service.dart';
+import '../services/instrument/easy_drum_service.dart';
+import '../services/instrument/easy_ggueng_service.dart';
+import '../services/instrument/easy_janggu_service.dart';
+import '../services/instrument/easy_jing_service.dart';
+import '../services/instrument/hard_drum_service.dart';
+import '../services/instrument/hard_ggueng_service.dart';
+import '../services/instrument/hard_janggu_service.dart';
+import '../services/instrument/hard_jing_service.dart';
+import '../services/instrument/mid_drum_service.dart';
 import 'instrument_page_controller.dart';
 
 class GameScreenController extends GetxController {

@@ -44,6 +44,7 @@ class CheckDecibelPageController extends GetxController{
         // Only the initial screen should trigger navigation
         if (Get.currentRoute == "/CheckDecibelScreen") {
           final db = noiseReading.meanDecibel;
+          print(db);
           if (db > 80) {
             overDecibel.value += 1;
             if (overDecibel.value >= 3) {
