@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-/// font-family 기본 설정은 앱 초기에 선언해서 각 텍스트 마다 선언 불필요 (다른 앱 폰트 사용할 때만 선언)
+import '../../controllers/result_screen_controller.dart';
+
 
 class ConsecutiveSuccessStat extends StatelessWidget {
   const ConsecutiveSuccessStat({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<ResultScreenController>();
     return Container(
       width: 288,
       height: 62,
@@ -37,7 +40,7 @@ class ConsecutiveSuccessStat extends StatelessWidget {
             ),
           ),
           Text(
-            '1234',
+            '${controller.combo.value}',
             style: TextStyle(
               fontSize: 32,
               color: Colors.white,

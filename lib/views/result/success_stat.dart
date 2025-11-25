@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../controllers/result_screen_controller.dart';
 
 class SuccessStat extends StatelessWidget {
   const SuccessStat({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<ResultScreenController>();
+    final ratio = controller.correctNotes.value /
+        (controller.wrongNotes.value + controller.correctNotes.value);
+
+    final percent = double.parse((ratio * 100).toStringAsFixed(1));
     return Container(
       width: 288,
       height: 62,
@@ -40,7 +48,7 @@ class SuccessStat extends StatelessWidget {
             textBaseline: TextBaseline.alphabetic,
             children: [
               Text(
-                '1234',
+                '${controller.correctNotes}',
                 style: TextStyle(
                   fontSize: 32,
                   color: Colors.white,
@@ -50,9 +58,9 @@ class SuccessStat extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 4),
-              const Text(
-                '(100%)',
-                style: TextStyle(
+              Text(
+                '($percent%)',
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white,
                 ),

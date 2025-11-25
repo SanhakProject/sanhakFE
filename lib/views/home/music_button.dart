@@ -19,7 +19,7 @@ class _MusicButtonState extends State<MusicButton> {
   int _currentIndex = 1;
   
   final List<Map<String, dynamic>> musics = [
-    {'title': '꼬마야 꼬마야', 'level': '쉬움', 'accuracy': 80},
+    {'title': '꼬마야꼬마야', 'level': '쉬움', 'accuracy': 80},
     {'title': '도라지타령', 'level': '보통', 'accuracy': 50},
     {'title': '아리랑', 'level': '어려움', 'accuracy': 100},
   ];

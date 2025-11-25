@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/result_screen_controller.dart';
+import '../result/result_screen.dart';
 
 class LoadingResultWaitScreen extends StatefulWidget {
   const LoadingResultWaitScreen({super.key});
@@ -16,6 +17,14 @@ class _LoadingResultWaitScreenState extends State<LoadingResultWaitScreen> {
   @override
   void initState() {
     super.initState();
+
+    ever(controller.isLoading, (isLoading) async {
+      if (isLoading == false) {
+        await Future.delayed(const Duration(seconds: 1));
+        Get.to(() => ResultScreen());
+      }
+    });
+
     controller.fetchResultData();
   }
   @override
