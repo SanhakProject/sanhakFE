@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/login_page_controller.dart';
+import '../home/home_screen.dart';
 import '../phone_login/phone_login_screen.dart';
 import '../phone_register/phone_register_screen.dart';
 
@@ -17,7 +18,8 @@ class LoginButtons extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            controller.kakaoLogin();
+            // controller.kakaoLogin();
+            Get.offAll(() => HomeScreen());
           },
           child: Image.asset(
             'assets/images/buttons/카카오로그인버튼.png',

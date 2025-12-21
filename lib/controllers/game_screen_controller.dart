@@ -56,12 +56,12 @@ class GameScreenController extends GetxController {
         rawData = await hardGguengService();
       } else if (instrumentName == '북' && songLevel == '보통') {
         rawData = await midDrumService();
-      } else if (instrumentName == '장구' && songLevel == '어려움') {
-        rawData = await hardJangguService();
-      } else if (instrumentName == '징' && songLevel == '어려움') {
-        rawData = await hardJingService();
-      } else if (instrumentName == '꽹과리' && songLevel == '어려움') {
-        rawData = await hardGguengService();
+      } else if (instrumentName == '장구' && songLevel == '보통') {
+        rawData = await midJangguService();
+      } else if (instrumentName == '징' && songLevel == '보통') {
+        rawData = await midJingService();
+      } else if (instrumentName == '꽹과리' && songLevel == '보통') {
+        rawData = await midGguengService();
       }
 
       totalMeasure.value = await filterTotalMeasure(rawData);

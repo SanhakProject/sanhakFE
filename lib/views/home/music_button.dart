@@ -19,9 +19,9 @@ class _MusicButtonState extends State<MusicButton> {
   int _currentIndex = 1;
   
   final List<Map<String, dynamic>> musics = [
-    {'title': '꼬마야꼬마야', 'level': '쉬움', 'accuracy': 80},
-    {'title': '도라지타령', 'level': '보통', 'accuracy': 50},
-    {'title': '아리랑', 'level': '어려움', 'accuracy': 100},
+    {'title': '꼬마야꼬마야', 'level': '쉬움'},
+    {'title': '도라지타령', 'level': '보통'},
+    {'title': '아리랑', 'level': '어려움'},
   ];
 
   @override
@@ -81,34 +81,74 @@ class _MusicButtonState extends State<MusicButton> {
           ),
         ),
         SizedBox(height: height * 0.02),
-
-          TextButton(
-            onPressed: () {
-              controller.getSongInfo(musics[_currentIndex]['title'], musics[_currentIndex]['level']);
-
-            },
-            style: TextButton.styleFrom(
-              backgroundColor: Colors.transparent,
-              padding: EdgeInsets.symmetric(
-                horizontal: width * 0.015, 
-                vertical: height * 0.013
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {
+                  controller.getSongInfo(musics[_currentIndex]['title'], musics[_currentIndex]['level']);
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.015,
+                    vertical: height * 0.013
+                    ),
                 ),
-            ),
-            child: Text(
-              '연주하러 가기',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                shadows: [
-                  Shadow(
-                    color: Color(0xffFEE500),
-                    blurRadius: 30,
-                    offset: Offset(0, 0),
-                  ),
-                ],
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '연주하러 가기',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        shadows: [
+                          Shadow(
+                            color: Color(0xffFEE500),
+                            blurRadius: 30,
+                            offset: Offset(0, 0),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
+              TextButton(
+                onPressed: () {
+                  // TODO: 음악 미리 듣기 기능 활성화
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  padding: EdgeInsets.symmetric(
+                      horizontal: width * 0.015,
+                      vertical: height * 0.013
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '음악 미리듣기',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        shadows: [
+                          Shadow(
+                            color: Color(0xffFEE500),
+                            blurRadius: 30,
+                            offset: Offset(0, 0),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
       ],
     );
@@ -151,17 +191,6 @@ class _MusicButtonState extends State<MusicButton> {
                 ),  
               ),
             ],
-          ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: Text(
-              '${item['accuracy']}% 정확도',
-              style: const TextStyle(
-                fontSize: 18,
-                color: Colors.black87,
-              ),
-            ),
           ),
         ],
       ),

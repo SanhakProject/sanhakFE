@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../components/appbars/appbar_without_percent_bar.dart';
 import '../../controllers/game_screen_controller.dart';
+import '../../controllers/music_controller.dart';
 import '../../controllers/rule_game_controller.dart';
 import '../../controllers/instrument_page_controller.dart';
 import '../game/game_screen.dart';
@@ -20,6 +21,7 @@ class _LoadingPrepareScreenState extends State<LoadingPrepareScreen> {
   final gameController = Get.find<GameScreenController>();
   final ruleGameController = Get.find<RuleGameController>();
   final instrumentController = Get.find<InstrumentPageController>();
+  final musicController = Get.find<MusicController>();
 
   Future<void> _prepareInformation() async {
     // gameMode에 따라 분기
@@ -41,6 +43,7 @@ class _LoadingPrepareScreenState extends State<LoadingPrepareScreen> {
   void initState() {
     super.initState();
     _prepareInformation();
+    musicController.loadMusic();
   }
 
   @override
