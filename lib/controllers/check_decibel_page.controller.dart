@@ -41,8 +41,9 @@ class CheckDecibelPageController extends GetxController{
         // Always feed the windowing logic so game-side max dB works
         _onNoise(noiseReading);
 
-        // Only the initial screen should trigger navigation
-        if (Get.currentRoute == "/CheckDecibelScreen") {
+        // Only the decibel check screens should trigger navigation
+        final currentRoute = Get.currentRoute;
+        if (currentRoute == "/CheckDecibelScreen" || currentRoute == "/RuleCheckDecibelScreen") {
           final db = noiseReading.meanDecibel;
           print(db);
           if (db > 80) {

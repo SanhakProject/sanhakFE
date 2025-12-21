@@ -3,32 +3,39 @@ import 'package:get/get.dart';
 
 import '../../components/appbars/appbar_without_percent_bar.dart';
 import '../../controllers/game_screen_controller.dart';
+import '../../controllers/rule_game_controller.dart';
 import '../../controllers/instrument_page_controller.dart';
 import '../game/game_screen.dart';
 import '../rule/rule_game_screen.dart';
 
 class LoadingPrepareScreen extends StatefulWidget {
-  final String? gameMode; // 게임 모드 매개변수 (rule 화면 or gmae 화면 결정)
-  
+  final String? gameMode; // 게임 모드 매개변수 (rule 화면 or game 화면 결정)
+
   const LoadingPrepareScreen({super.key, this.gameMode});
   @override
   State<LoadingPrepareScreen> createState() => _LoadingPrepareScreenState();
 }
 
 class _LoadingPrepareScreenState extends State<LoadingPrepareScreen> {
-  final controller = Get.find<GameScreenController>();
+  final gameController = Get.find<GameScreenController>();
+  final ruleGameController = Get.find<RuleGameController>();
   final instrumentController = Get.find<InstrumentPageController>();
 
   Future<void> _prepareInformation() async {
-    await controller.fetchMeasures();
-    await Future.delayed(const Duration(seconds: 3));
     // gameMode에 따라 분기
-    // 이후 gamefinal 등 다른 화면으로 전환을 위한 수정 필요
     if (widget.gameMode == '게임을 시작하기 전, 음향테스트를 진행합니다.\n사용하시는 악기를 여러번 연주해주세요!') {
+      // 튜토리얼: 징 쉬움 데이터 로드
+      instrumentController.songLevel.value = '쉬움';
+      await ruleGameController.fetchMeasures();
+      await Future.delayed(const Duration(seconds: 3));
       Get.to(() => RuleGameScreen());
     } else {
+      // 일반 게임: 선택한 악기/난이도 데이터 로드
+      await gameController.fetchMeasures();
+      await Future.delayed(const Duration(seconds: 3));
       Get.to(() => GameScreen());
-    }  }
+    }
+  }
 
   @override
   void initState() {
