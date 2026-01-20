@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 
-import '../views/check/check_decibel_screen.dart';
 import '../views/home/music_screen.dart';
 
 class InstrumentPageController extends GetxController {
@@ -16,7 +15,6 @@ class InstrumentPageController extends GetxController {
   void getSongInfo(String name, String level) {
     songName.value = name;
     songLevel.value = level;
-    Get.to(() => CheckDecibelScreen());
   }
 
   void setPractice() {

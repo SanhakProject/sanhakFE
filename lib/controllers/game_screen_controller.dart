@@ -15,6 +15,9 @@ import '../services/instrument/hard_ggueng_service.dart';
 import '../services/instrument/hard_janggu_service.dart';
 import '../services/instrument/hard_jing_service.dart';
 import '../services/instrument/mid_drum_service.dart';
+import '../services/instrument/mid_ggueng_service.dart';
+import '../services/instrument/mid_janggu_service.dart';
+import '../services/instrument/mid_jing_service.dart';
 import 'instrument_page_controller.dart';
 
 class GameScreenController extends GetxController {
@@ -29,6 +32,8 @@ class GameScreenController extends GetxController {
   Rx<int> oneLineMeasure = 0.obs;
 
   RxList<List<String>> totalPlayedNotes = <List<String>>[].obs;
+
+  bool _isGameActive = false;
 
   Future<void> fetchMeasures() async {
     try {
@@ -79,16 +84,47 @@ class GameScreenController extends GetxController {
   }
 
   Future<void> updateMeasures() async {
+    _isGameActive = true; // 게임 시작 플래그 ON
+
     for (int i = 0; i < totalMeasure.value; i++) {
+      // 1. 루프 시작 시 체크: 게임이 멈췄으면 즉시 종료
+      if (!_isGameActive) return;
+
       currentMeasure.value = allMeasures[i];
       if (i == totalMeasure.value - 1) {
         nextMeasure.value = [""];
       } else {
         nextMeasure.value = allMeasures[i+1];
       }
+
+      // 대기 시간
       await Future.delayed(Duration(milliseconds: lineChange.value));
+
+      // 2. 대기 후 체크 (가장 중요): 기다리는 동안 게임이 꺼졌으면 즉시 종료
+      if (!_isGameActive) return;
     }
+
+    // 게임이 정상적으로 다 끝났을 때만 실행
     await Future.delayed(const Duration(seconds: 1));
-    currentMeasure.value = [''];
+    if (_isGameActive) {
+      currentMeasure.value = [''];
+    }
+  }
+
+  // [추가 2] 게임 강제 종료 및 리셋 함수
+  void resetGame() {
+    print("GameScreenController: 게임 강제 종료 및 리셋");
+    _isGameActive = false; // 플래그를 꺼서 updateMeasures 루프를 멈춤
+
+    // 필요하다면 데이터 초기화 (재진입 시 찌꺼기 데이터 방지)
+    currentMeasure.clear();
+    nextMeasure.clear();
+    totalPlayedNotes.clear();
+  }
+
+  @override
+  void onClose() {
+    resetGame(); // 컨트롤러가 사라질 때 확실하게 멈춤
+    super.onClose();
   }
 }

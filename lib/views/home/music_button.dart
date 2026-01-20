@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/instrument_page_controller.dart';
+import '../check/check_decibel_screen.dart';
+import '../loading/loading_music_screen.dart';
 
 class MusicButton extends StatefulWidget {
   const MusicButton({super.key});
@@ -87,6 +89,7 @@ class _MusicButtonState extends State<MusicButton> {
               TextButton(
                 onPressed: () {
                   controller.getSongInfo(musics[_currentIndex]['title'], musics[_currentIndex]['level']);
+                  Get.to(() => CheckDecibelScreen());
                 },
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.transparent,
@@ -118,7 +121,8 @@ class _MusicButtonState extends State<MusicButton> {
               ),
               TextButton(
                 onPressed: () {
-                  // TODO: 음악 미리 듣기 기능 활성화
+                  controller.getSongInfo(musics[_currentIndex]['title'], musics[_currentIndex]['level']);
+                  Get.to(() => LoadingMusicScreen());
                 },
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.transparent,

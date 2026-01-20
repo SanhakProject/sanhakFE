@@ -35,14 +35,28 @@ class _GameScreenState extends State<GameScreen> {
 
   Future<void> _startSequentialAnimation() async {
     for (int j = 0; j < controller.totalMeasure.value; j++) {
+      // 1. 큰 루프 시작 시 화면 살아있는지 체크
+      if (!mounted) return;
+
       final List<String> playedNotes = [];
       for (int i = 0; i < _isBig.length; i++) {
-        setState(() {_isBig[i] = true;});
+        // 2. 내부 루프 시작 시 체크
+        if (!mounted) return;
+
+        setState(() { _isBig[i] = true; });
         decibelController.beginWindow();
 
+        // === 여기가 제일 중요 ===
+        // 지정된 시간만큼 대기 (이 시간 동안 사용자가 나갈 수 있음)
         await Future.delayed(Duration(milliseconds: controller.interval.value));
 
+        // 3. 기다리고 눈을 떴는데 화면이 없으면 즉시 종료 (setState 방지)
+        if (!mounted) return;
+        // =======================
+
         final maxDb = decibelController.endWindow();
+
+        // 점수 계산 로직
         if (controller.allMeasures[j][i].isEmpty) {
           if (maxDb < 75) {
             _correct += 1; _combo += 1;
@@ -60,18 +74,30 @@ class _GameScreenState extends State<GameScreen> {
             playedNotes.add('wrong');
           }
         }
-        setState(() {_isBig[i] = false;});
+
+        // 4. 안전하게 setState 호출
+        if (mounted) {
+          setState(() { _isBig[i] = false; });
+        }
       }
       controller.totalPlayedNotes.add(playedNotes);
     }
-    Future.delayed(const Duration(seconds: 5), () {
-      final resultController = Get.find<ResultScreenController>();
-      resultController.correctNotes.value = _correct;
-      resultController.wrongNotes.value = _wrong;
-      final comboMax = _comboList.isNotEmpty ? _comboList.reduce(max) : 0;
-      resultController.combo.value = comboMax;
-      Get.to(() => const LoadingResultWaitScreen());
-    });
+
+    // 5. 모든 연주가 끝난 후 5초 대기 로직
+    if (!mounted) return; // 대기 시작 전 체크
+
+    await Future.delayed(const Duration(seconds: 5)); // await로 변경하여 흐름 제어
+
+    if (!mounted) return; // 5초 대기 후 화면이 여전히 살아있는지 체크
+
+    // 화면이 살아있을 때만 결과창 이동 로직 실행
+    final resultController = Get.find<ResultScreenController>();
+    resultController.correctNotes.value = _correct;
+    resultController.wrongNotes.value = _wrong;
+    final comboMax = _comboList.isNotEmpty ? _comboList.reduce(max) : 0;
+    resultController.combo.value = comboMax;
+
+    Get.to(() => const LoadingResultWaitScreen());
   }
 
   @override
@@ -94,6 +120,7 @@ class _GameScreenState extends State<GameScreen> {
     super.dispose();
     decibelController.noiseCheckCancel();
     musicController.stopMusic();
+    controller.onClose();
   }
 
   @override

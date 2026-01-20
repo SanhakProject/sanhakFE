@@ -12,6 +12,8 @@ class MusicController extends GetxController {
   // 음악 로딩 완료 여부 체크
   final RxBool isMusicLoaded = false.obs;
 
+  final RxBool isFinished = false.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -26,6 +28,12 @@ class MusicController extends GetxController {
     // 현재 재생 중인 위치 실시간 감지
     _player.positionStream.listen((position) {
       currentPosition.value = position;
+    });
+
+    _player.playerStateStream.listen((state) {
+      if (state.processingState == ProcessingState.completed) {
+        isFinished.value = true;
+      }
     });
   }
 
